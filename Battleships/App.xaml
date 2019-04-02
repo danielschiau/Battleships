@@ -1,0 +1,38 @@
+﻿<Application x:Class="Battleships.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Battleships"
+             xmlns:battlefield="clr-namespace:Battleships.Pages.Battlefield"
+             xmlns:history="clr-namespace:Battleships.Pages.History"
+             xmlns:settings="clr-namespace:Battleships.Pages.Settings"
+             xmlns:gamePlay="clr-namespace:Battleships.Pages.GamePlay"
+             StartupUri="Pages/MainWindow/MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type battlefield:BattlefieldViewModel}">
+                <battlefield:BattlefieldView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type history:HistoryViewModel}">
+                <history:HistoryView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type settings:SettingsViewModel}">
+                <settings:SettingsView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type gamePlay:GamePlayViewModel}">
+                <gamePlay:GamePlayView />
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
