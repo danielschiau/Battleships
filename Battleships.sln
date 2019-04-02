@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.489
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Battleships.Presenter", "Battleships.Presenter\Battleships.Presenter.csproj", "{46C9FDEF-C145-4A7D-85C2-101B9FBA8F7A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{46C9FDEF-C145-4A7D-85C2-101B9FBA8F7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46C9FDEF-C145-4A7D-85C2-101B9FBA8F7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46C9FDEF-C145-4A7D-85C2-101B9FBA8F7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46C9FDEF-C145-4A7D-85C2-101B9FBA8F7A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ED13A619-7B44-4C3C-88EC-1F0307E84395}
+	EndGlobalSection
+EndGlobal
