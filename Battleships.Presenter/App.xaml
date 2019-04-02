@@ -1,7 +1,6 @@
 ﻿<Application x:Class="Battleships.Presenter.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Battleships"
              xmlns:battlefield="clr-namespace:Battleships.Presenter.Pages.Battlefield"
              xmlns:history="clr-namespace:Battleships.Presenter.Pages.History"
              xmlns:settings="clr-namespace:Battleships.Presenter.Pages.Settings"
