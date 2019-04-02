@@ -1,8 +1,7 @@
-﻿using Battleships.Pages.Base;
-using Battleships.Pages.Battlefield;
-using Battleships.Pages.Settings;
+﻿using Battleships.Presenter.Pages.Base;
+using Battleships.Presenter.Pages.Settings;
 
-namespace Battleships.Pages.MainWindow
+namespace Battleships.Presenter.Pages.MainWindow
 {
     public class MainWindowViewModel : BaseViewModel
     {

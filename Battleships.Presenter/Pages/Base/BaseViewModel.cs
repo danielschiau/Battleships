@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Battleships.Pages.Base
+namespace Battleships.Presenter.Pages.Base
 {
     public class BaseViewModel : INotifyPropertyChanged
     {

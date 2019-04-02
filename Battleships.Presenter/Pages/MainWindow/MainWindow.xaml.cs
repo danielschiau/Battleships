@@ -1,7 +1,6 @@
-﻿using Battleships.Pages.MainWindow;
-using MahApps.Metro.Controls;
+﻿using MahApps.Metro.Controls;
 
-namespace Battleships
+namespace Battleships.Presenter.Pages.MainWindow
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

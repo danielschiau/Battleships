@@ -1,4 +1,4 @@
-﻿namespace Battleships.Pages.Battlefield
+﻿namespace Battleships.Presenter.Pages.Battlefield
 {
     public class BattlefieldViewModel
     {

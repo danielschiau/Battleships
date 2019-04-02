@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Battleships.Pages.Base
+namespace Battleships.Presenter.Pages.Base
 {
     public class DelegateCommand<T> : ICommand where T : class
     {
