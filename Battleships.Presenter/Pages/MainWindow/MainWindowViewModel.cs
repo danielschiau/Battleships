@@ -1,5 +1,7 @@
-﻿using Battleships.Presenter.Pages.Base;
+﻿using System.Windows;
+using Battleships.Presenter.Pages.Base;
 using Battleships.Presenter.Pages.Settings;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace Battleships.Presenter.Pages.MainWindow
 {
@@ -15,6 +17,16 @@ namespace Battleships.Presenter.Pages.MainWindow
         public MainWindowViewModel()
         {
             ContainerViewModel = new SettingsViewModel();
+        }
+
+        public void PopUpMessage(string title, string message)
+        {
+            Application.Current.Dispatcher.Invoke(() => DialogCoordinator.Instance.ShowMessageAsync(this, title, message));
+        }
+
+        public void NavigateToPage(BaseViewModel viewModel)
+        {
+            ContainerViewModel = viewModel;
         }
     }
 }

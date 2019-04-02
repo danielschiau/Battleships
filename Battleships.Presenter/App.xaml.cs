@@ -1,4 +1,7 @@
 ﻿using System.Windows;
+using Autofac;
+using Battleships.Presenter.Ioc;
+using Battleships.Presenter.Navigation;
 
 namespace Battleships.Presenter
 {
@@ -7,5 +10,21 @@ namespace Battleships.Presenter
     /// </summary>
     public partial class App : Application
     {
+        private readonly INavigationService _navigationService;
+
+        public App()
+        {
+            Dispatcher.UnhandledException += OnDispatcherUnhandledException;
+
+            IocSetup.RegisterModules();
+
+            _navigationService = IocSetup.Instance.Resolve<INavigationService>();
+        }
+
+        void OnDispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            _navigationService.PopUpMessage("Error", e.Exception.Message);
+            e.Handled = true;
+        }
     }
 }

@@ -6,6 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Battleships"
         mc:Ignorable="d"
+        mah:DialogParticipation.Register="{Binding}"
         Title="Battleships" Height="600" Width="800">
     <Grid>
         <ContentControl
