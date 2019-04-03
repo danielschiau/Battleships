@@ -75,15 +75,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\GameOver\GameOverView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\GamePlay\GamePlayView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\History\HistoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -106,18 +98,10 @@
       <DependentUpon>BattlefieldView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Battlefield\BattlefieldViewModel.cs" />
-    <Compile Include="Pages\GameOver\GameOverView.xaml.cs">
-      <DependentUpon>GameOverView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\GameOver\GameOverViewModel.cs" />
     <Compile Include="Pages\GamePlay\GamePlayView.xaml.cs">
       <DependentUpon>GamePlayView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\GamePlay\GamePlayViewModel.cs" />
-    <Compile Include="Pages\History\HistoryView.xaml.cs">
-      <DependentUpon>HistoryView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\History\HistoryViewModel.cs" />
     <Compile Include="Pages\MainWindow\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

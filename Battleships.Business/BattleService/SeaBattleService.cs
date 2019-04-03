@@ -3,7 +3,7 @@ using Battleships.Models;
 
 namespace Battleships.Business.BattleService
 {
-    public class SeaBattleService: IBattleService<SeaBattle, SeaBattleSettings>
+    public class SeaBattleService : IBattleService<SeaBattle, SeaBattleSettings>
     {
         private readonly ITargetPlacementService<SeaBattle> _targetPlacementService;
 
@@ -28,8 +28,8 @@ namespace Battleships.Business.BattleService
             {
                 for (var column = 0; column < settings.Columns; column++)
                 {
-                    map[row, column] = new MapCell();
-                } 
+                    map[row, column] = new MapCell { Row = row, Column = column };
+                }
             }
 
             return map;
