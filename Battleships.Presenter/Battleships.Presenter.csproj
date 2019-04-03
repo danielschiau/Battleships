@@ -71,6 +71,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Style\Converters\CellStateToBackgroundConverter.cs" />
+    <Compile Include="Style\Converters\DebugModeMapConverter.cs" />
     <Page Include="Pages\Battlefield\BattlefieldView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -3,4 +3,5 @@
                     xmlns:local="clr-namespace:Battleships.Presenter.Style.Converters">
 
     <local:CellStateToBackgroundConverter x:Key="CellStateToBackgroundConverter" />
+    <local:DebugModeMapConverter x:Key="DebugModeMapConverter" />
 </ResourceDictionary>

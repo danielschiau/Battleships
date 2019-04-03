@@ -1,38 +1,34 @@
-﻿using Battleships.Business.AllocationService;
+﻿using System.Collections.Generic;
+using Battleships.Business.AllocationService;
+using Battleships.Business.MapService;
 using Battleships.Models;
 
 namespace Battleships.Business.BattleService
 {
     public class SeaBattleService : IBattleService<SeaBattle, SeaBattleSettings>
     {
-        private readonly ITargetPlacementService<SeaBattle> _targetPlacementService;
+        private readonly ITargetPlacementService<List<Ship>> _targetPlacementService;
+        private readonly IBattleMapService _battleMapService;
 
-        public SeaBattleService(ITargetPlacementService<SeaBattle> targetPlacementService)
+        public SeaBattleService(ITargetPlacementService<List<Ship>> targetPlacementService, IBattleMapService battleMapService)
         {
             _targetPlacementService = targetPlacementService;
+            _battleMapService = battleMapService;
         }
 
         public SeaBattle CreateBattle(SeaBattleSettings settings)
         {
-            return new SeaBattle
-            {
-                Map = CreateMap(settings)
-            };
+            var map = _battleMapService.CreateMap(settings.Rows, settings.Columns);
+            var ships = _targetPlacementService.PlaceTargetsOnMap(settings.Ships, map);
+
+            return new SeaBattle { Map = map, Ships = ships };
         }
 
-        private static MapCell[,] CreateMap(SeaBattleSettings settings)
+        public void EvaluateHit(MapCell hit)
         {
-            var map = new MapCell[settings.Rows, settings.Columns];
-
-            for (var row = 0; row < settings.Rows; row++)
-            {
-                for (var column = 0; column < settings.Columns; column++)
-                {
-                    map[row, column] = new MapCell { Row = row, Column = column };
-                }
-            }
-
-            return map;
+            
         }
+
+        
     }
 }

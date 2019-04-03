@@ -39,6 +39,7 @@ namespace Battleships.Presenter.Pages.GamePlay
         public void OnCellSelected(MapCell cell)
         {
             cell.State = CellStateType.Tested;
+            _battleService.EvaluateHit(cell);
             BattleField.Render(BattleMatch.Map, OnCellSelected);
         }
     }

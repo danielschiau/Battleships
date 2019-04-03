@@ -31,6 +31,13 @@ namespace Battleships.Presenter.Pages.Battlefield
             set { _map = value; OnPropertyChanged(nameof(Map));}
         }
 
+        private bool _isDebugMode;
+        public bool IsDebugMode
+        {
+            get => _isDebugMode;
+            set { _isDebugMode = value; OnPropertyChanged(nameof(IsDebugMode)); }
+        }
+
         private RowColumnIndex _selectedCellIndex;
         public RowColumnIndex SelectedCellIndex
         {
@@ -43,10 +50,9 @@ namespace Battleships.Presenter.Pages.Battlefield
             GenerateHeaders();
         }
 
-        public DelegateCommand<MapCell> CellSelectedCommand => new DelegateCommand<MapCell>((cell) =>
-        {
-            _onCellSelected(Map[SelectedCellIndex.Row, SelectedCellIndex.Column]);
-        });
+        public DelegateCommand ToggleDebugModeCommand => new DelegateCommand(() => IsDebugMode = !IsDebugMode);
+
+        public DelegateCommand CellSelectedCommand => new DelegateCommand(() => _onCellSelected(Map[SelectedCellIndex.Row, SelectedCellIndex.Column]));
 
         public void Render(MapCell[,] map, Action<MapCell> onCellSelected)
         {

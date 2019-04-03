@@ -10,6 +10,38 @@
 
     <StackPanel>
         <TextBlock Text="Double click on a cell for launching the missile" />
+
+        <Button Content="Toggle debug mode" HorizontalAlignment="Left" Padding="10 0" Command="{Binding ToggleDebugModeCommand}"></Button>
+
+        <StackPanel Orientation="Horizontal">
+        <DataGrid Name="BattlefieldMapDebug"
+                  Visibility="{Binding IsDebugMode, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  Margin="0 20 20 0"
+                  SelectionMode="Single"
+                  SelectionUnit="Cell"
+                  RowHeaderWidth="20"
+                  HeadersVisibility="All"
+                  dataGrid2D:ItemsSource.ColumnHeadersSource="{Binding ColumnHeaders}"
+                  dataGrid2D:ItemsSource.RowHeadersSource="{Binding RowHeaders}"
+                  dataGrid2D:ItemsSource.Array2D="{Binding Map}"
+                  dataGrid2D:Selected.Index="{Binding SelectedCellIndex}">
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="IsEnabled" Value="True"/>
+                </Style>
+            </DataGrid.RowStyle>
+            <dataGrid2D:Cell.Template>
+                <DataTemplate>
+                    <Border Cursor="Hand" Margin="5" Width="40" Height="35" Background="{Binding Converter={StaticResource DebugModeMapConverter}}" />
+                </DataTemplate>
+            </dataGrid2D:Cell.Template>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding CellSelectedCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </DataGrid>
+
         <DataGrid Name="BattlefieldMap"
                   Margin="0 20 0 0"
                   SelectionMode="Single"
@@ -32,10 +64,11 @@
             </dataGrid2D:Cell.Template>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
-                    <i:InvokeCommandAction Command="{Binding CellSelectedCommand}" CommandParameter="{Binding ElementName=BattlefieldMap, Path=SelectedItem}" />
+                    <i:InvokeCommandAction Command="{Binding CellSelectedCommand}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </DataGrid>
+        </StackPanel>
 
         <StackPanel Orientation="Horizontal">
             <StackPanel Orientation="Horizontal">
