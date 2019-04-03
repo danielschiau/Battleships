@@ -10,7 +10,12 @@ namespace Battleships.Presenter.Style.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return ((MapCell)value).Ship != null ? new SolidColorBrush(Colors.Blue) : new SolidColorBrush(Colors.WhiteSmoke);
+            var cell = (MapCell) value;
+            var result = cell?.Ship != null ? new SolidColorBrush(Colors.Blue) : new SolidColorBrush(Colors.WhiteSmoke);
+
+            return cell?.Ship?.Head.Row == cell?.Row && cell?.Ship.Head.Column == cell?.Column
+                ? new SolidColorBrush(Colors.DarkBlue)
+                : result;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

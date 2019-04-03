@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Battleships.Models;
 
 namespace Battleships.Business.AllocationService
@@ -19,6 +20,7 @@ namespace Battleships.Business.AllocationService
             {
                 var isHorizontal = _random.Next(2) == 0;
                 ship.Position = PositionShip(isHorizontal, ship.Size, map);
+                ship.Head = ship.Position.First();
 
                 foreach (var cell in ship.Position)
                 {
@@ -62,7 +64,7 @@ namespace Battleships.Business.AllocationService
                     }
                     else if (!isHorizontal && map[row, index].Ship == null)
                     {
-                        result.Add(map[index, column]);
+                        result.Add(map[row, index]);
                         allocatedCells++;
                     }
                     else

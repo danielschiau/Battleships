@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Battleships.Business.AllocationService;
 using Battleships.Business.MapService;
 using Battleships.Models;
@@ -24,11 +25,39 @@ namespace Battleships.Business.BattleService
             return new SeaBattle { Map = map, Ships = ships };
         }
 
-        public void EvaluateHit(MapCell hit)
+        public void EvaluateHit(SeaBattle battle, MapCell hit)
         {
-            
+            if (battle.Map[hit.Row, hit.Column].State == CellStateType.NotTouched)
+                battle.Map[hit.Row, hit.Column].State = CellStateType.Tested;
+
+            foreach (var ship in battle.Ships)
+            {
+                var shipCellHit = ship.Position.FirstOrDefault(x => IsSamePosition(x, hit));
+                if (shipCellHit != null)
+                {
+                    battle.Map[hit.Row, hit.Column].State = CellStateType.Hit;
+                    shipCellHit.State = CellStateType.Hit;
+                }
+
+                if (IsSamePosition(ship.Head, hit))
+                {
+                    ship.IsSunk = true;
+                    ship.Position.ForEach(x =>
+                    {
+                        battle.Map[x.Row, x.Column].State = CellStateType.Hit;
+                        x.State = CellStateType.Hit;
+                    });
+                }
+                else if (ship.Position.All(x => x.State == CellStateType.Hit))
+                {
+                    ship.IsSunk = true;
+                }
+            }
         }
 
-        
+        private static bool IsSamePosition(MapCell mapCell, MapCell other)
+        {
+            return mapCell.Row == other.Row && mapCell.Column == other.Column;
+        }
     }
 }

@@ -62,8 +62,8 @@ namespace Battleships.Presenter.Pages.Battlefield
 
         private void GenerateHeaders()
         {
-            ColumnHeaders = new ObservableCollection<string>{"a", "B"};
-            RowHeaders = new ObservableCollection<string>{"1", "2"};
+            ColumnHeaders = new ObservableCollection<string>{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N"};
+            RowHeaders = new ObservableCollection<string>{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"};
 
         }
     }

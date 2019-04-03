@@ -2,9 +2,9 @@
 
 namespace Battleships.Business.BattleService
 {
-    public interface IBattleService<out T, in TK>
+    public interface IBattleService<T, in TK>
     {
         T CreateBattle(TK settings);
-        void EvaluateHit(MapCell hit);
+        void EvaluateHit(T battle, MapCell hit);
     }
 }
