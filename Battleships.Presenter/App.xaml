@@ -5,6 +5,7 @@
              xmlns:history="clr-namespace:Battleships.Presenter.Pages.History"
              xmlns:settings="clr-namespace:Battleships.Presenter.Pages.Settings"
              xmlns:gamePlay="clr-namespace:Battleships.Presenter.Pages.GamePlay"
+             xmlns:gameOver="clr-namespace:Battleships.Presenter.Pages.GameOver"
              StartupUri="Pages/MainWindow/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -30,6 +31,10 @@
 
             <DataTemplate DataType="{x:Type gamePlay:GamePlayViewModel}">
                 <gamePlay:GamePlayView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type gameOver:GameOverViewModel}">
+                <gameOver:GameOverView />
             </DataTemplate>
 
         </ResourceDictionary>

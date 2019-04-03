@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Battleships.Presenter.Navigation;
 using Battleships.Presenter.Pages.Battlefield;
+using Battleships.Presenter.Pages.GameOver;
 using Battleships.Presenter.Pages.GamePlay;
 using Battleships.Presenter.Pages.History;
 using Battleships.Presenter.Pages.MainWindow;
@@ -14,11 +15,12 @@ namespace Battleships.Presenter.Ioc
         {
             builder.RegisterType<NavigationService>().As<INavigationService>().SingleInstance();
 
-            builder.RegisterType<BattlefieldViewModel>().SingleInstance().AsSelf();
-            builder.RegisterType<GamePlayViewModel>().SingleInstance().AsSelf();
-            builder.RegisterType<HistoryViewModel>().SingleInstance().AsSelf();
-            builder.RegisterType<MainWindowViewModel>().SingleInstance().AsSelf();
-            builder.RegisterType<SettingsViewModel>().SingleInstance().AsSelf();
+            builder.RegisterType<BattlefieldViewModel>().AsSelf();
+            builder.RegisterType<GamePlayViewModel>().AsSelf();
+            builder.RegisterType<HistoryViewModel>().AsSelf();
+            builder.RegisterType<MainWindowViewModel>().AsSelf();
+            builder.RegisterType<SettingsViewModel>().AsSelf();
+            builder.RegisterType<GameOverViewModel>().AsSelf();
         }
     }
 }
