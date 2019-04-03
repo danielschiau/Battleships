@@ -14,9 +14,9 @@ namespace Battleships.Presenter.Pages.MainWindow
             set { _containerViewModel = value; OnPropertyChanged(nameof(ContainerViewModel)); }
         }
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(SettingsViewModel settingsViewModel)
         {
-            ContainerViewModel = new SettingsViewModel();
+            ContainerViewModel = settingsViewModel;
         }
 
         public void PopUpMessage(string title, string message)

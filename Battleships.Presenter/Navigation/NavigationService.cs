@@ -7,21 +7,19 @@ namespace Battleships.Presenter.Navigation
 {
     public class NavigationService : INavigationService
     {
-        private readonly MainWindowViewModel _mainWindowViewModel;
-
-        public NavigationService(MainWindowViewModel mainWindowViewModel)
-        {
-            _mainWindowViewModel = mainWindowViewModel;
-        }
-
         public void NavigateToViewModel(BaseViewModel viewModel)
         {
-            _mainWindowViewModel.ContainerViewModel = viewModel;
+            GetWindowInstance().ContainerViewModel = viewModel;
         }
 
         public void PopUpMessage(string title, string message)
         {
-            Application.Current.Dispatcher.Invoke(() => DialogCoordinator.Instance.ShowMessageAsync(_mainWindowViewModel, title, message));
+            Application.Current.Dispatcher.Invoke(() => DialogCoordinator.Instance.ShowMessageAsync(GetWindowInstance(), title, message));
+        }
+
+        private static MainWindowViewModel GetWindowInstance()
+        {
+            return Application.Current?.MainWindow?.DataContext as MainWindowViewModel;
         }
     }
 }
