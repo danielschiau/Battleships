@@ -11,6 +11,7 @@ namespace Battleships.Presenter.Ioc
             var containerBuilder = new ContainerBuilder();
 
             containerBuilder.RegisterModule<PresenterModule>();
+            containerBuilder.RegisterModule<BusinessModule>();
 
             Instance = containerBuilder.Build();
         }
