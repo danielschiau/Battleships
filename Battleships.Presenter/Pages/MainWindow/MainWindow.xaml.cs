@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using Battleships.Presenter.Ioc;
-using Battleships.Presenter.Navigation;
 using MahApps.Metro.Controls;
 
 namespace Battleships.Presenter.Pages.MainWindow
