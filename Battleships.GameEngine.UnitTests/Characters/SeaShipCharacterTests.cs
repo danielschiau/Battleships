@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Battleships.GameEngine.Characters;
-using Battleships.GameEngine.Maps;
+using Battleships.GameEngine.Worlds;
 using NUnit.Framework;
 
 namespace Battleships.GameEngine.UnitTests.Characters
@@ -27,25 +27,25 @@ namespace Battleships.GameEngine.UnitTests.Characters
         [Test]
         public void EvaluateHit_WithNoPositionOnMap_DoesNotThrowException()
         {
-            Assert.DoesNotThrow(() => SubjectUnderTest.EvaluateHit(new MapCell(0, 0)));
+            Assert.DoesNotThrow(() => SubjectUnderTest.EvaluateHit(new WorldCell(0, 0)));
         }
 
         [Test]
         public void EvaluateHit_WithHeadHit_MarksAllCellsAsHit()
         {
-            var headHit = new MapCell(1, 2);
-            SubjectUnderTest.Position = new List<MapCell> { headHit, new MapCell(2, 2) };
+            var headHit = new WorldCell(1, 2);
+            SubjectUnderTest.Position = new List<WorldCell> { headHit, new WorldCell(2, 2) };
 
             SubjectUnderTest.EvaluateHit(headHit);
 
-            Assert.IsTrue(SubjectUnderTest.Position.All(x => x.State == MapCellStateType.Hit));
+            Assert.IsTrue(SubjectUnderTest.Position.All(x => x.State == WorldCellStateType.Hit));
         }
 
         [Test]
         public void EvaluateHit_WithHeadHit_MarksAsDestroyed()
         {
-            var headHit = new MapCell(1, 2);
-            SubjectUnderTest.Position = new List<MapCell> { headHit, new MapCell(2, 2) };
+            var headHit = new WorldCell(1, 2);
+            SubjectUnderTest.Position = new List<WorldCell> { headHit, new WorldCell(2, 2) };
 
             SubjectUnderTest.EvaluateHit(headHit);
 
@@ -55,8 +55,8 @@ namespace Battleships.GameEngine.UnitTests.Characters
         [Test]
         public void EvaluateHit_WithTailHit_DoesNotMarkAsDestroyed()
         {
-            var tailHit = new MapCell(2, 2);
-            SubjectUnderTest.Position = new List<MapCell> { new MapCell( 1, 2), tailHit };
+            var tailHit = new WorldCell(2, 2);
+            SubjectUnderTest.Position = new List<WorldCell> { new WorldCell( 1, 2), tailHit };
 
             SubjectUnderTest.EvaluateHit(tailHit);
 
@@ -72,9 +72,9 @@ namespace Battleships.GameEngine.UnitTests.Characters
         [Test]
         public void Head_WithSomePosition_IsFirstCell()
         {
-            var headCell = new MapCell(1, 2);
+            var headCell = new WorldCell(1, 2);
 
-            SubjectUnderTest.Position = new List<MapCell> { headCell, new MapCell( 2, 2) };
+            SubjectUnderTest.Position = new List<WorldCell> { headCell, new WorldCell( 2, 2) };
 
             Assert.AreEqual(headCell, SubjectUnderTest.Head);
         }

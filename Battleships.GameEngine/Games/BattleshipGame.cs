@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Battleships.GameEngine.Characters;
-using Battleships.GameEngine.Maps;
+using Battleships.GameEngine.Worlds;
 
 namespace Battleships.GameEngine.Games
 {
@@ -19,10 +19,15 @@ namespace Battleships.GameEngine.Games
             Characters.ForEach(x => World.PlaceOnMap(x));
         }
 
-        public void EvaluateHit(MapCell hit)
+        public void EvaluateHit(WorldCell hit)
         {
-            World.Map[hit.Row, hit.Column].State = MapCellStateType.Tested;
-            Characters.ForEach(_ => _.EvaluateHit(hit));
+            World.EvaluateHit(hit);
+            Characters.ForEach(x => x.EvaluateHit(hit));
+            EvaluateGameOver();
+        }
+
+        private void EvaluateGameOver()
+        {
             IsGameOver = Characters.All(x => x.IsDestroyed);
         }
     }

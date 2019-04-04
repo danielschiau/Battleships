@@ -2,7 +2,7 @@
 using System.Linq;
 using Battleships.GameEngine.Characters;
 using Battleships.GameEngine.Games;
-using Battleships.GameEngine.Maps;
+using Battleships.GameEngine.Worlds;
 using NUnit.Framework;
 
 namespace Battleships.GameEngine.UnitTests.Games
@@ -36,19 +36,19 @@ namespace Battleships.GameEngine.UnitTests.Games
         [Test]
         public void EvaluateHit_WithMissCell_SetsTheCellAsTested()
         {
-            var cell = new MapCell(1,2);
-            _subjectUnderTest.World.Map[cell.Row, cell.Column].Character = null;
+            var cell = new WorldCell(1,2);
+            _subjectUnderTest.World.World[cell.Row, cell.Column].Character = null;
 
             _subjectUnderTest.EvaluateHit(cell);
 
-            Assert.AreEqual(MapCellStateType.Tested, _subjectUnderTest.World.Map[cell.Row, cell.Column].State);
+            Assert.AreEqual(WorldCellStateType.Tested, _subjectUnderTest.World.World[cell.Row, cell.Column].State);
         }
 
         [Test]
         public void EvaluateHit_AllCharactersDestroyed_TheGameIsOver()
         {
-            var cell = new MapCell(1, 2);
-            _subjectUnderTest.Characters.ForEach(x => x.Position.ForEach(p => p.State = MapCellStateType.Hit));
+            var cell = new WorldCell(1, 2);
+            _subjectUnderTest.Characters.ForEach(x => x.Position.ForEach(p => p.State = WorldCellStateType.Hit));
 
             _subjectUnderTest.EvaluateHit(cell);
 

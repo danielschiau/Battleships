@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Battleships.GameEngine.Maps;
+using Battleships.GameEngine.Worlds;
 
 namespace Battleships.GameEngine.Characters
 {
@@ -8,9 +8,9 @@ namespace Battleships.GameEngine.Characters
     {
         public string Name { get; set; }
         public int Size { get; }
-        public List<MapCell> Position { get; set; }
-        public MapCell Head => Position?.FirstOrDefault();
-        public bool IsDestroyed => Position.All(x => x.State == MapCellStateType.Hit);
+        public List<WorldCell> Position { get; set; }
+        public WorldCell Head => Position?.FirstOrDefault();
+        public bool IsDestroyed => Position.All(x => x.State == WorldCellStateType.Hit);
 
         public SeaShipCharacter(string name, int size)
         {
@@ -18,7 +18,7 @@ namespace Battleships.GameEngine.Characters
             Size = size;
         }
 
-        public void EvaluateHit(MapCell hit)
+        public void EvaluateHit(WorldCell hit)
         {
             if (Position == null)
                 return;
@@ -27,18 +27,18 @@ namespace Battleships.GameEngine.Characters
             EvaluateTailHit(hit);
         }
 
-        private void EvaluateTailHit(MapCell hit)
+        private void EvaluateTailHit(WorldCell hit)
         {
             var shipCellHit = Position.FirstOrDefault(cell => cell.Equals(hit));
 
             if (shipCellHit != null)
-                shipCellHit.State = MapCellStateType.Hit;
+                shipCellHit.State = WorldCellStateType.Hit;
         }
 
-        private void EvaluateHeadHit(MapCell hit)
+        private void EvaluateHeadHit(WorldCell hit)
         {
             if (hit.Equals(Head))
-                Position.ForEach(cell => cell.State = MapCellStateType.Hit);
+                Position.ForEach(cell => cell.State = WorldCellStateType.Hit);
         }
     }
 }

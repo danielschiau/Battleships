@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
-using Battleships.GameEngine.Maps;
+using Battleships.GameEngine.Worlds;
 
 namespace Battleships.Presenter.Style.Converters
 {
@@ -10,7 +10,7 @@ namespace Battleships.Presenter.Style.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var cell = (MapCell) value;
+            var cell = (WorldCell) value;
 
             if (cell?.Character != null)
             {

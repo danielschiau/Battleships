@@ -1,5 +1,5 @@
 ﻿using Battleships.GameEngine.Games;
-using Battleships.GameEngine.Maps;
+using Battleships.GameEngine.Worlds;
 using Battleships.Presenter.Navigation;
 using Battleships.Presenter.Pages.Base;
 using Battleships.Presenter.Pages.Battlefield;
@@ -37,10 +37,10 @@ namespace Battleships.Presenter.Pages.GamePlay
         {
             _settings = settings;
             Game = new BattleshipGame(_settings);
-            BattleField.Render(Game.World.Map, OnCellSelected);
+            BattleField.Render(Game.World.World, OnCellSelected);
         }
 
-        public void OnCellSelected(MapCell cell)
+        public void OnCellSelected(WorldCell cell)
         {
             _game.EvaluateHit(cell);
             if (Game.IsGameOver)

@@ -42,10 +42,10 @@
     <Compile Include="Games\GameSettings.cs" />
     <Compile Include="Games\IGamePlay.cs" />
     <Compile Include="Games\BattleshipGame.cs" />
-    <Compile Include="Maps\IWorld.cs" />
-    <Compile Include="Maps\MapCell.cs" />
-    <Compile Include="Maps\MapCellStateType.cs" />
-    <Compile Include="Maps\SeaWorld.cs" />
+    <Compile Include="Worlds\IWorld.cs" />
+    <Compile Include="Worlds\WorldCell.cs" />
+    <Compile Include="Worlds\WorldCellStateType.cs" />
+    <Compile Include="Worlds\SeaWorld.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
-using Battleships.GameEngine.Maps;
+using Battleships.GameEngine.Worlds;
 
 namespace Battleships.Presenter.Style.Converters
 {
@@ -10,16 +10,16 @@ namespace Battleships.Presenter.Style.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var cell = (MapCell)value;
+            var cell = (WorldCell)value;
 
-            if (cell.Equals(cell.Character?.Head) && cell.State == MapCellStateType.Hit)
+            if (cell.Equals(cell.Character?.Head) && cell.State == WorldCellStateType.Hit)
                 return new SolidColorBrush(Colors.DarkRed);
 
             switch (cell.State)
             {
-                case MapCellStateType.NotTouched: return new SolidColorBrush(Colors.WhiteSmoke);
-                case MapCellStateType.Tested: return new SolidColorBrush(Colors.Gray);
-                case MapCellStateType.Hit: return new SolidColorBrush(Colors.Red);
+                case WorldCellStateType.NotTouched: return new SolidColorBrush(Colors.WhiteSmoke);
+                case WorldCellStateType.Tested: return new SolidColorBrush(Colors.Gray);
+                case WorldCellStateType.Hit: return new SolidColorBrush(Colors.Red);
                 default: return new SolidColorBrush(Colors.Gray);
             }            
         }

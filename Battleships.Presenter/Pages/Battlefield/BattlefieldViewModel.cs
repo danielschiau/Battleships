@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using Battleships.GameEngine.Maps;
+using Battleships.GameEngine.Worlds;
 using Battleships.Presenter.Pages.Base;
 using Gu.Wpf.DataGrid2D;
 
@@ -8,7 +8,7 @@ namespace Battleships.Presenter.Pages.Battlefield
 {
     public class BattlefieldViewModel : BaseViewModel
     {
-        private Action<MapCell> _onCellSelected;
+        private Action<WorldCell> _onCellSelected;
 
         private ObservableCollection<string> _columnHeaders;
         public ObservableCollection<string> ColumnHeaders
@@ -24,11 +24,11 @@ namespace Battleships.Presenter.Pages.Battlefield
             set { _rowHeaders = value; OnPropertyChanged(nameof(RowHeaders)); }
         }
 
-        private MapCell[,] _map;
-        public MapCell[,] Map
+        private WorldCell[,] _world;
+        public WorldCell[,] World
         {
-            get => _map;
-            set { _map = value; OnPropertyChanged(nameof(Map)); }
+            get => _world;
+            set { _world = value; OnPropertyChanged(nameof(World)); }
         }
 
         private bool _isDebugMode;
@@ -53,12 +53,12 @@ namespace Battleships.Presenter.Pages.Battlefield
 
         public DelegateCommand ToggleDebugModeCommand => new DelegateCommand(() => IsDebugMode = !IsDebugMode);
 
-        public DelegateCommand CellSelectedCommand => new DelegateCommand(() => _onCellSelected(Map[SelectedCellIndex.Row, SelectedCellIndex.Column]));
+        public DelegateCommand CellSelectedCommand => new DelegateCommand(() => _onCellSelected(World[SelectedCellIndex.Row, SelectedCellIndex.Column]));
 
-        public void Render(MapCell[,] map, Action<MapCell> onCellSelected)
+        public void Render(WorldCell[,] world, Action<WorldCell> onCellSelected)
         {
             _onCellSelected = onCellSelected;
-            Map = map;
+            World = world;
         }
 
         private void GenerateHeaders()

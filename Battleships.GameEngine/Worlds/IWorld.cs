@@ -1,10 +1,11 @@
 ﻿using Battleships.GameEngine.Characters;
 
-namespace Battleships.GameEngine.Maps
+namespace Battleships.GameEngine.Worlds
 {
     public interface IWorld
     {
-        MapCell[,] Map { get; set; }
+        WorldCell[,] World { get; set; }
+        void EvaluateHit(WorldCell hit);
         void PlaceOnMap(ICharacter character);
     }
 }

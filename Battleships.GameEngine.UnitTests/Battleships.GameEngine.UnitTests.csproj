@@ -71,7 +71,7 @@
     <Compile Include="Characters\SeaShipCharacterTests.cs" />
     <Compile Include="Games\BattleshipGameTests.cs" />
     <Compile Include="Maps\MapCellTests.cs" />
-    <Compile Include="Maps\SeaMapTests.cs" />
+    <Compile Include="Maps\SeaWorldTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

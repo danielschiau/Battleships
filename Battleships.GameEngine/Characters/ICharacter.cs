@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Battleships.GameEngine.Maps;
+using Battleships.GameEngine.Worlds;
 
 namespace Battleships.GameEngine.Characters
 {
@@ -7,9 +7,9 @@ namespace Battleships.GameEngine.Characters
     {
         string Name { get; set; }
         int Size { get; }
-        MapCell Head { get; }
-        List<MapCell> Position { get; set; }
+        WorldCell Head { get; }
+        List<WorldCell> Position { get; set; }
         bool IsDestroyed { get; }
-        void EvaluateHit(MapCell hit);
+        void EvaluateHit(WorldCell hit);
     }
 }

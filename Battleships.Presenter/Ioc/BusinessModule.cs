@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using Battleships.GameEngine.Games;
-using Battleships.GameEngine.Maps;
+using Battleships.GameEngine.Worlds;
 
 namespace Battleships.Presenter.Ioc
 {
