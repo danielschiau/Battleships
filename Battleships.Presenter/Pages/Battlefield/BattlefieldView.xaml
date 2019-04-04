@@ -51,7 +51,7 @@
             </DataGrid.RowStyle>
             <dataGrid2D:Cell.Template>
                 <DataTemplate>
-                    <Border Cursor="Hand" Margin="5" Width="40" Height="35" Background="{Binding State, Converter={StaticResource CellStateToBackgroundConverter}}" />
+                    <Border Cursor="Hand" Margin="5" Width="40" Height="35" Background="{Binding Converter={StaticResource CellStateToBackgroundConverter}}" />
                 </DataTemplate>
             </dataGrid2D:Cell.Template>
             <DataGrid.CellStyle>

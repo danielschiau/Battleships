@@ -32,14 +32,14 @@ namespace Battleships.Business.BattleService
 
             foreach (var ship in battle.Ships)
             {
-                var shipCellHit = ship.Position.FirstOrDefault(x => IsSamePosition(x, hit));
+                var shipCellHit = ship.Position.FirstOrDefault(x => x.Equals(hit));
                 if (shipCellHit != null)
                 {
                     battle.Map[hit.Row, hit.Column].State = CellStateType.Hit;
                     shipCellHit.State = CellStateType.Hit;
                 }
 
-                if (IsSamePosition(ship.Head, hit))
+                if (hit.Equals(ship.Head))
                 {
                     ship.IsSunk = true;
                     ship.Position.ForEach(x =>
@@ -55,11 +55,6 @@ namespace Battleships.Business.BattleService
             }
 
             battle.IsGameOver = battle.Ships.All(x => x.IsSunk);
-        }
-
-        private static bool IsSamePosition(MapCell mapCell, MapCell other)
-        {
-            return mapCell.Row == other.Row && mapCell.Column == other.Column;
         }
     }
 }

@@ -47,11 +47,8 @@ namespace Battleships.Presenter.Pages.GamePlay
         public void OnCellSelected(MapCell cell)
         {
             _battleService.EvaluateHit(BattleMatch, cell);
-
             if (BattleMatch.IsGameOver)
-            {
                 _navigationService.PopUpMessage("You won!", "Game over.\nFor a new round, press \"Start battle\"");
-            }
         }
     }
 }
