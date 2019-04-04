@@ -2,7 +2,7 @@
 
 namespace Battleships.Presenter.Pages.Base
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public class BaseViewModel : INotifyPropertyChanged, IViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

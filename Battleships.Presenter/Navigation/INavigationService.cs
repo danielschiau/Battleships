@@ -4,7 +4,7 @@ namespace Battleships.Presenter.Navigation
 {
     public interface INavigationService
     {
-        void NavigateToViewModel(BaseViewModel viewModel);
+        void NavigateToViewModel(IViewModel viewModel);
         void PopUpMessage(string title, string message);
     }
 }

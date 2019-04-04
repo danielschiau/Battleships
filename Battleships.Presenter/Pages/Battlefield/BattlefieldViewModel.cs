@@ -6,7 +6,7 @@ using Gu.Wpf.DataGrid2D;
 
 namespace Battleships.Presenter.Pages.Battlefield
 {
-    public class BattlefieldViewModel : BaseViewModel
+    public class BattlefieldViewModel : BaseViewModel, IBattlefieldViewModel
     {
         private Action<WorldCell> _onCellSelected;
 

@@ -7,7 +7,7 @@ namespace Battleships.Presenter.Navigation
 {
     public class NavigationService : INavigationService
     {
-        public void NavigateToViewModel(BaseViewModel viewModel)
+        public void NavigateToViewModel(IViewModel viewModel)
         {
             GetWindowInstance().ContainerViewModel = viewModel;
         }
@@ -17,9 +17,9 @@ namespace Battleships.Presenter.Navigation
             Application.Current.Dispatcher.Invoke(() => DialogCoordinator.Instance.ShowMessageAsync(GetWindowInstance(), title, message));
         }
 
-        private static MainWindowViewModel GetWindowInstance()
+        private static IMainWindowViewModel GetWindowInstance()
         {
-            return Application.Current?.MainWindow?.DataContext as MainWindowViewModel;
+            return Application.Current?.MainWindow?.DataContext as IMainWindowViewModel;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Battleships.Presenter.Pages.MainWindow
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = IocSetup.Instance.Resolve<MainWindowViewModel>();
+            DataContext = IocSetup.Instance.Resolve<IMainWindowViewModel>();
         }
     }
 }

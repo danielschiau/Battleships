@@ -6,7 +6,7 @@ using Battleships.Presenter.Pages.Battlefield;
 
 namespace Battleships.Presenter.Pages.GamePlay
 {
-    public class GamePlayViewModel : BaseViewModel
+    public class GamePlayViewModel : BaseViewModel, IGamePlayViewModel
     {
         private GameSettings _settings;
         private readonly INavigationService _navigationService;
@@ -18,14 +18,14 @@ namespace Battleships.Presenter.Pages.GamePlay
             set { _game = value; OnPropertyChanged(nameof(Game)); }
         }
 
-        private BattlefieldViewModel _battleField;
-        public BattlefieldViewModel BattleField
+        private IBattlefieldViewModel _battleField;
+        public IBattlefieldViewModel BattleField
         {
             get => _battleField;
             set { _battleField = value; OnPropertyChanged(nameof(BattleField)); }
         }
 
-        public GamePlayViewModel(INavigationService navigationService, BattlefieldViewModel battlefieldViewModel)
+        public GamePlayViewModel(INavigationService navigationService, IBattlefieldViewModel battlefieldViewModel)
         {
             _navigationService = navigationService;
             BattleField = battlefieldViewModel;
