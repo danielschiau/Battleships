@@ -3,15 +3,54 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-        <TextBlock Text="Settings" />
-        <Button Content="Start"  Command="{Binding NavigateToGamePlayCommand}"></Button>
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
-        <ContentControl
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            Content="{Binding BattlefieldViewModel}"/>
+        <TextBlock Text="Welcome to Battleships game, are you ready?" FontSize="32"/>
+
+        <StackPanel Orientation="Vertical" Margin="0 60 0 0">
+            <TextBlock Text="Select map size" FontSize="18" VerticalAlignment="Center" />
+            <ComboBox HorizontalAlignment="Left"    
+                  VerticalAlignment="Top"   
+                  Width="120"   
+                  ItemsSource="{Binding Path=GridSizeOptions}"    
+                  SelectedItem="{Binding Path=SelectedGridSize}">
+                <ComboBox.DisplayMemberPath>
+                    <MultiBinding StringFormat="{}{0}, {1}">
+                        <Binding Path="Key" />
+                        <Binding Path="Value" />
+                    </MultiBinding>
+                </ComboBox.DisplayMemberPath>
+            </ComboBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Margin="0 20 0 0">
+            <TextBlock Text="Ships" FontSize="18"></TextBlock>
+            <ListView ItemsSource="{Binding Ships}" BorderThickness="0">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                                   ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                   MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}"
+                                   ItemHeight="{Binding (ListView.View).ItemHeight, RelativeSource={RelativeSource AncestorType=ListView}}" />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <mah:Tile Margin="0" Width="100" Height="70">
+                            <StackPanel>
+                                <TextBlock Text="{Binding Name}" FontSize="18" />
+                                <TextBlock Text="" />
+                                <TextBlock Text="{Binding Size, StringFormat={}{0} cells}" />
+                            </StackPanel>
+                        </mah:Tile>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+
+        <Button Margin="0 60 0 0" Content="Start fighting"  Style="{StaticResource AccentedSquareButtonStyle}" Command="{Binding NavigateToGamePlayCommand}" />
     </StackPanel>
 </UserControl>

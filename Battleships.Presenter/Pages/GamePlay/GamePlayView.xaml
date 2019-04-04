@@ -5,8 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-        <TextBlock Text="GamePlay" />
-        <Button Content="End"  Command="{Binding NavigateToGameOverCommand}"></Button>
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Button Content="Start new battle" Command="{Binding StartBattleCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <ContentControl
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Content="{Binding BattleField}"/>
+
+            <ContentControl
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Content="{Binding HistoryViewModel}"/>
+        </StackPanel>
     </StackPanel>
 </UserControl>

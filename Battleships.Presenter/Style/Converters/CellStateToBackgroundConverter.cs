@@ -10,15 +10,18 @@ namespace Battleships.Presenter.Style.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var state = (CellStateType)value;
+            var cell = (MapCell)value;
 
-            switch (state)
+            if (cell.Equals(cell.Ship?.Head) && cell.State == CellStateType.Hit)
+                return new SolidColorBrush(Colors.DarkRed);
+
+            switch (cell.State)
             {
+                case CellStateType.NotTouched: return new SolidColorBrush(Colors.WhiteSmoke);
                 case CellStateType.Tested: return new SolidColorBrush(Colors.Gray);
                 case CellStateType.Hit: return new SolidColorBrush(Colors.Red);
-                case CellStateType.NotTouched: 
-                default: return new SolidColorBrush(Colors.WhiteSmoke);
-            }
+                default: return new SolidColorBrush(Colors.Gray);
+            }            
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

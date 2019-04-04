@@ -5,5 +5,11 @@
         public int Column { get; set; }
         public int Row { get; set; }
         public CellStateType State { get; set; }
+        public Ship Ship { get; set; }
+
+        public bool Equals(MapCell other)
+        {
+            return Row == other?.Row && Column == other.Column;
+        }
     }
 }

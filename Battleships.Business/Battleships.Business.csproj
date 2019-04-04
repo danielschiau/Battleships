@@ -45,6 +45,8 @@
     <Compile Include="AllocationService\ShipPlacementService.cs" />
     <Compile Include="BattleService\IBattleService.cs" />
     <Compile Include="BattleService\SeaBattleService.cs" />
+    <Compile Include="MapService\IBattleMapService.cs" />
+    <Compile Include="MapService\SeaMapService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

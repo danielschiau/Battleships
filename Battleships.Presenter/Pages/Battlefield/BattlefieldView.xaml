@@ -4,22 +4,46 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:dataGrid2D="http://gu.se/DataGrid2D"
-             xmlns:models="clr-namespace:Battleships.Models;assembly=Battleships.Models"
-             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <Grid>
-        <DataGrid dataGrid2D:Index.StartAt="1" 
-                  SelectionUnit="Cell"
-                  dataGrid2D:ItemsSource.Array2D="{Binding SeaBattle.Map}"
-                  dataGrid2D:Selected.CellItem="{Binding SelectedCell, Mode=TwoWay}">
-            <DataGrid.RowHeaderStyle>
-                <Style TargetType="{x:Type DataGridRowHeader}">
-                    <Setter Property="Content" 
-                            Value="{Binding Path=(dataGrid2D:Index.OfRow), RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" />
+    <StackPanel>
+        <TextBlock Text="Double click on a cell for launching the missile" />
+
+        <Button Content="Toggle debug mode" HorizontalAlignment="Left" Padding="10 0" Command="{Binding ToggleDebugModeCommand}"></Button>
+
+        <StackPanel Orientation="Horizontal">
+        <DataGrid Name="BattlefieldMapDebug"
+                  Visibility="{Binding IsDebugMode, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  Margin="0 20 20 0"
+                  RowHeaderWidth="20"
+                  HeadersVisibility="All"
+                  dataGrid2D:ItemsSource.ColumnHeadersSource="{Binding ColumnHeaders}"
+                  dataGrid2D:ItemsSource.RowHeadersSource="{Binding RowHeaders}"
+                  dataGrid2D:ItemsSource.Array2D="{Binding Map}">
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="IsEnabled" Value="True"/>
                 </Style>
-            </DataGrid.RowHeaderStyle>
+            </DataGrid.RowStyle>
+                <dataGrid2D:Cell.Template>
+                    <DataTemplate>
+                        <Border Margin="5" Width="40" Height="35" Background="{Binding Converter={StaticResource DebugModeMapConverter}}" />
+                    </DataTemplate>
+                </dataGrid2D:Cell.Template>
+            </DataGrid>
+
+        <DataGrid Name="BattlefieldMap"
+                  Margin="0 20 0 0"
+                  SelectionMode="Single"
+                  SelectionUnit="Cell"
+                  RowHeaderWidth="20"
+                  HeadersVisibility="All"
+                  dataGrid2D:ItemsSource.ColumnHeadersSource="{Binding ColumnHeaders}"
+                  dataGrid2D:ItemsSource.RowHeadersSource="{Binding RowHeaders}"
+                  dataGrid2D:ItemsSource.Array2D="{Binding Map}"
+                  dataGrid2D:Selected.Index="{Binding SelectedCellIndex}">
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
                     <Setter Property="IsEnabled" Value="True"/>
@@ -27,12 +51,42 @@
             </DataGrid.RowStyle>
             <dataGrid2D:Cell.Template>
                 <DataTemplate>
-                    <Border Cursor="Hand" Margin="5" Width="50" Height="50" Background="{Binding State, Converter={StaticResource CellStateToBackgroundConverter}}">
-
-                    </Border>
+                    <Border Cursor="Hand" Margin="5" Width="40" Height="35" Background="{Binding Converter={StaticResource CellStateToBackgroundConverter}}" />
                 </DataTemplate>
             </dataGrid2D:Cell.Template>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="WhiteSmoke" />
+                            <Setter Property="BorderThickness" Value="1" />
+                            <Setter Property="BorderBrush" Value="DarkGray" />
+                            </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding CellSelectedCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </DataGrid>
-    </Grid>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Not touched"/>
+                <Border Margin="5 0 0 0" Width="10" Height="10" BorderBrush="Black" BorderThickness="1" Background="WhiteSmoke" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
+                <TextBlock Text="Tested (miss)"/>
+                <Border Margin="5 0 0 0" Width="10" Height="10" BorderBrush="Black" BorderThickness="1" Background="Gray" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
+                <TextBlock Text="Hit"/>
+                <Border Margin="5 0 0 0" Width="10" Height="10" BorderBrush="Black" BorderThickness="1" Background="Red" />
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
 
 </UserControl>

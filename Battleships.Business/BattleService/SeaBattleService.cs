@@ -1,38 +1,60 @@
-﻿using Battleships.Business.AllocationService;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Battleships.Business.AllocationService;
+using Battleships.Business.MapService;
 using Battleships.Models;
 
 namespace Battleships.Business.BattleService
 {
-    public class SeaBattleService: IBattleService<SeaBattle, SeaBattleSettings>
+    public class SeaBattleService : IBattleService<SeaBattle, SeaBattleSettings>
     {
-        private readonly ITargetPlacementService<SeaBattle> _targetPlacementService;
+        private readonly ITargetPlacementService<List<Ship>> _targetPlacementService;
+        private readonly IBattleMapService _battleMapService;
 
-        public SeaBattleService(ITargetPlacementService<SeaBattle> targetPlacementService)
+        public SeaBattleService(ITargetPlacementService<List<Ship>> targetPlacementService, IBattleMapService battleMapService)
         {
             _targetPlacementService = targetPlacementService;
+            _battleMapService = battleMapService;
         }
 
         public SeaBattle CreateBattle(SeaBattleSettings settings)
         {
-            return new SeaBattle
-            {
-                Map = CreateMap(settings)
-            };
+            var map = _battleMapService.CreateMap(settings.Rows, settings.Columns);
+            var ships = _targetPlacementService.PlaceTargetsOnMap(settings.Ships, map);
+
+            return new SeaBattle { Map = map, Ships = ships };
         }
 
-        private static MapCell[,] CreateMap(SeaBattleSettings settings)
+        public void EvaluateHit(SeaBattle battle, MapCell hit)
         {
-            var map = new MapCell[settings.Rows, settings.Columns];
+            if (battle.Map[hit.Row, hit.Column].State == CellStateType.NotTouched)
+                battle.Map[hit.Row, hit.Column].State = CellStateType.Tested;
 
-            for (var row = 0; row < settings.Rows; row++)
+            foreach (var ship in battle.Ships)
             {
-                for (var column = 0; column < settings.Columns; column++)
+                var shipCellHit = ship.Position.FirstOrDefault(x => x.Equals(hit));
+                if (shipCellHit != null)
                 {
-                    map[row, column] = new MapCell();
-                } 
+                    battle.Map[hit.Row, hit.Column].State = CellStateType.Hit;
+                    shipCellHit.State = CellStateType.Hit;
+                }
+
+                if (hit.Equals(ship.Head))
+                {
+                    ship.IsSunk = true;
+                    ship.Position.ForEach(x =>
+                    {
+                        battle.Map[x.Row, x.Column].State = CellStateType.Hit;
+                        x.State = CellStateType.Hit;
+                    });
+                }
+                else if (ship.Position.All(x => x.State == CellStateType.Hit))
+                {
+                    ship.IsSunk = true;
+                }
             }
 
-            return map;
+            battle.IsGameOver = battle.Ships.All(x => x.IsSunk);
         }
     }
 }

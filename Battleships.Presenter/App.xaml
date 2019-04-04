@@ -2,10 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:battlefield="clr-namespace:Battleships.Presenter.Pages.Battlefield"
-             xmlns:history="clr-namespace:Battleships.Presenter.Pages.History"
              xmlns:settings="clr-namespace:Battleships.Presenter.Pages.Settings"
              xmlns:gamePlay="clr-namespace:Battleships.Presenter.Pages.GamePlay"
-             xmlns:gameOver="clr-namespace:Battleships.Presenter.Pages.GameOver"
              StartupUri="Pages/MainWindow/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -22,20 +20,12 @@
                 <battlefield:BattlefieldView />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type history:HistoryViewModel}">
-                <history:HistoryView />
-            </DataTemplate>
-
             <DataTemplate DataType="{x:Type settings:SettingsViewModel}">
                 <settings:SettingsView />
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type gamePlay:GamePlayViewModel}">
                 <gamePlay:GamePlayView />
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type gameOver:GameOverViewModel}">
-                <gameOver:GameOverView />
             </DataTemplate>
 
         </ResourceDictionary>
