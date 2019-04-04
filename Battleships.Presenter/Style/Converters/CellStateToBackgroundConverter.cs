@@ -12,14 +12,14 @@ namespace Battleships.Presenter.Style.Converters
         {
             var cell = (MapCell)value;
 
-            if (cell.Equals(cell.Ship?.Head) && cell.State == CellStateType.Hit)
+            if (cell.Equals(cell.Ship?.Head) && cell.State == MapCellStateType.Hit)
                 return new SolidColorBrush(Colors.DarkRed);
 
             switch (cell.State)
             {
-                case CellStateType.NotTouched: return new SolidColorBrush(Colors.WhiteSmoke);
-                case CellStateType.Tested: return new SolidColorBrush(Colors.Gray);
-                case CellStateType.Hit: return new SolidColorBrush(Colors.Red);
+                case MapCellStateType.NotTouched: return new SolidColorBrush(Colors.WhiteSmoke);
+                case MapCellStateType.Tested: return new SolidColorBrush(Colors.Gray);
+                case MapCellStateType.Hit: return new SolidColorBrush(Colors.Red);
                 default: return new SolidColorBrush(Colors.Gray);
             }            
         }

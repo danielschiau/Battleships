@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CellStateType.cs" />
+    <Compile Include="MapCellStateType.cs" />
     <Compile Include="SeaBattleSettings.cs" />
     <Compile Include="MapCell.cs" />
     <Compile Include="SeaBattle.cs" />

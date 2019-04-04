@@ -27,34 +27,44 @@ namespace Battleships.Business.BattleService
 
         public void EvaluateHit(SeaBattle battle, MapCell hit)
         {
-            if (battle.Map[hit.Row, hit.Column].State == CellStateType.NotTouched)
-                battle.Map[hit.Row, hit.Column].State = CellStateType.Tested;
+            battle.Map[hit.Row, hit.Column].State = MapCellStateType.Tested;
 
-            foreach (var ship in battle.Ships)
+            battle.Ships.ForEach(ship =>
             {
-                var shipCellHit = ship.Position.FirstOrDefault(x => x.Equals(hit));
-                if (shipCellHit != null)
-                {
-                    battle.Map[hit.Row, hit.Column].State = CellStateType.Hit;
-                    shipCellHit.State = CellStateType.Hit;
-                }
+                EvaluateTailHit(hit, ship);
+                EvaluateHeadHit(hit, ship);
+                EvaluateSunk(ship);
+            });
 
-                if (hit.Equals(ship.Head))
-                {
-                    ship.IsSunk = true;
-                    ship.Position.ForEach(x =>
-                    {
-                        battle.Map[x.Row, x.Column].State = CellStateType.Hit;
-                        x.State = CellStateType.Hit;
-                    });
-                }
-                else if (ship.Position.All(x => x.State == CellStateType.Hit))
-                {
-                    ship.IsSunk = true;
-                }
-            }
+            EvaluateGameOver(battle);
+        }
 
+        private static void EvaluateGameOver(SeaBattle battle)
+        {
             battle.IsGameOver = battle.Ships.All(x => x.IsSunk);
+        }
+
+        private static void EvaluateSunk(Ship ship)
+        {
+            ship.IsSunk = ship.Position.All(x => x.State == MapCellStateType.Hit);
+        }
+
+        private static void EvaluateHeadHit(MapCell hit, Ship ship)
+        {
+            if (hit.Equals(ship.Head))
+            {
+                ship.Position.ForEach(cell => cell.State = MapCellStateType.Hit);
+            }
+        }
+
+        private static void EvaluateTailHit(MapCell hit, Ship ship)
+        {
+            var shipCellHit = ship.Position.FirstOrDefault(cell => cell.Equals(hit));
+
+            if (shipCellHit != null)
+            {
+                shipCellHit.State = MapCellStateType.Hit;
+            }
         }
     }
 }

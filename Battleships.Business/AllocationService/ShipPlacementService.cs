@@ -19,51 +19,61 @@ namespace Battleships.Business.AllocationService
         {
             var result = new List<Ship>();
 
-            foreach (var shipSettings in shipsSettings)
+            shipsSettings.ForEach(shipSettings =>
             {
-                var ship = Clone(shipSettings);
-                var isHorizontal = _random.Next(2) == 0;
-                ship.Position = PositionShip(isHorizontal, ship.Size, map);
-                ship.Head = ship.Position.First();
-                ship.Position.ForEach(cell => map[cell.Row, cell.Column].Ship = ship);
-                result.Add(ship);
-            }
+                var position = GetShipPosition(shipSettings.Size, map);
+                result.Add(CreateShip(shipSettings, position, map));
+            });
 
             return result;
         }
 
-        private List<MapCell> PositionShip(bool isHorizontal, int shipSize, MapCell[,] map)
+        private static Ship CreateShip(Ship shipSettings, List<MapCell> position, MapCell[,] map)
         {
-            var allocationRetries = 0;
+            var ship = new Ship
+            {
+                Position = position,
+                Head = position.First(),
+                IsSunk = false,
+                Size = shipSettings.Size,
+                Name = shipSettings.Name
+            };
+
+            ship.Position.ForEach(cell => map[cell.Row, cell.Column].Ship = ship);
+
+            return ship;
+        }
+
+        private List<MapCell> GetShipPosition(int shipSize, MapCell[,] map)
+        {
+            var isHorizontal = _random.Next(2) == 0;
 
             var rowsNr = map.GetLength(0);
             var columnsNr = map.GetLength(1);
 
             var rowsBorder = !isHorizontal ? rowsNr : rowsNr - shipSize;
             var columnsBorder = isHorizontal ? columnsNr : columnsNr - shipSize;
+            var endBorder = isHorizontal ? rowsBorder : columnsBorder;
 
+            var allocationRetries = 0;
             while (allocationRetries < MaxAllocationRetries)
             {
-                var allocatedCells = 0;
                 var result = new List<MapCell>();
-
-                var row = _random.Next(rowsBorder);
-                var column = _random.Next(columnsBorder);
-
-                var forBorder = isHorizontal ? rowsBorder : columnsBorder;
-
+                var allocatedCells = 0;
+                var randomRow = _random.Next(rowsBorder);
+                var randomColumn = _random.Next(columnsBorder);
                 var shipDoesNotFit = false;
 
-                for (int index = 0; index < forBorder && shipDoesNotFit == false; index++)
+                for (int index = 0; index < endBorder && shipDoesNotFit == false; index++)
                 {
-                    if (isHorizontal && map[index, column].Ship == null)
+                    if (isHorizontal && map[index, randomColumn].Ship == null)
                     {
-                        result.Add(map[index, column]);
+                        result.Add(map[index, randomColumn]);
                         allocatedCells++;
                     }
-                    else if (!isHorizontal && map[row, index].Ship == null)
+                    else if (!isHorizontal && map[randomRow, index].Ship == null)
                     {
-                        result.Add(map[row, index]);
+                        result.Add(map[randomRow, index]);
                         allocatedCells++;
                     }
                     else
@@ -81,18 +91,6 @@ namespace Battleships.Business.AllocationService
             }
 
             return null;
-        }
-
-        private static Ship Clone(Ship ship)
-        {
-            return new Ship
-            {
-                Position = ship.Position,
-                Head = ship.Head,
-                IsSunk = ship.IsSunk,
-                Name = ship.Name,
-                Size = ship.Size
-            };
         }
     }
 }

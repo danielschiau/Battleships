@@ -1,6 +1,6 @@
 ﻿namespace Battleships.Models
 {
-    public enum CellStateType
+    public enum MapCellStateType
     {
         NotTouched,
         Tested,
