@@ -33,27 +33,21 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AllocationService\ITargetPlacementService.cs" />
-    <Compile Include="AllocationService\ShipPlacementService.cs" />
-    <Compile Include="BattleService\IBattleService.cs" />
-    <Compile Include="BattleService\SeaBattleService.cs" />
-    <Compile Include="MapService\IBattleMapService.cs" />
-    <Compile Include="MapService\SeaMapService.cs" />
+    <Compile Include="Characters\BattleshipCharacter.cs" />
+    <Compile Include="Characters\DestroyerCharacter.cs" />
+    <Compile Include="Characters\ICharacter.cs" />
+    <Compile Include="Characters\SeaShipCharacter.cs" />
+    <Compile Include="Games\GameSettings.cs" />
+    <Compile Include="Games\GameState.cs" />
+    <Compile Include="Games\IGame.cs" />
+    <Compile Include="Games\BattleshipGame.cs" />
+    <Compile Include="Maps\IMap.cs" />
+    <Compile Include="Maps\MapCell.cs" />
+    <Compile Include="Maps\MapCellStateType.cs" />
+    <Compile Include="Maps\SeaMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Battleships.Models\Battleships.Models.csproj">
-      <Project>{189c9f7f-fd35-4137-b6aa-b101f7dda67e}</Project>
-      <Name>Battleships.Models</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

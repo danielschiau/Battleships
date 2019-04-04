@@ -1,5 +1,5 @@
-﻿using Battleships.Business.BattleService;
-using Battleships.Models;
+﻿using Battleships.Business.Games;
+using Battleships.Business.Maps;
 using Battleships.Presenter.Navigation;
 using Battleships.Presenter.Pages.Base;
 using Battleships.Presenter.Pages.Battlefield;
@@ -8,15 +8,15 @@ namespace Battleships.Presenter.Pages.GamePlay
 {
     public class GamePlayViewModel : BaseViewModel
     {
-        private SeaBattleSettings _settings;
-        private readonly IBattleService<SeaBattle, SeaBattleSettings> _battleService;
+        private GameSettings _settings;
+        private readonly IGamePlay _gamePlay;
         private readonly INavigationService _navigationService;
 
-        private SeaBattle _battleMatch;
-        public SeaBattle BattleMatch
+        private GameState _gameStateMatch;
+        public GameState GameStateMatch
         {
-            get => _battleMatch;
-            set { _battleMatch = value; OnPropertyChanged(nameof(BattleMatch)); }
+            get => _gameStateMatch;
+            set { _gameStateMatch = value; OnPropertyChanged(nameof(GameStateMatch)); }
         }
 
         private BattlefieldViewModel _battleField;
@@ -26,29 +26,28 @@ namespace Battleships.Presenter.Pages.GamePlay
             set { _battleField = value; OnPropertyChanged(nameof(BattleField)); }
         }
 
-        public GamePlayViewModel(IBattleService<SeaBattle, SeaBattleSettings> battleService,
-            INavigationService navigationService,
-            BattlefieldViewModel battlefieldViewModel)
+        public GamePlayViewModel(IGamePlay gamePlay, INavigationService navigationService, BattlefieldViewModel battlefieldViewModel)
         {
-            _battleService = battleService;
+            _gamePlay = gamePlay;
             _navigationService = navigationService;
             BattleField = battlefieldViewModel;
         }
 
         public DelegateCommand StartBattleCommand => new DelegateCommand(() => StartBattle(_settings));
 
-        public void StartBattle(SeaBattleSettings settings)
+        public void StartBattle(GameSettings settings)
         {
             _settings = settings;
-            BattleMatch = _battleService.CreateBattle(_settings);
-            BattleField.Render(BattleMatch.Map, OnCellSelected);
+            _gamePlay.Start(_settings);
+            GameStateMatch = _gamePlay.State;
+            BattleField.Render(GameStateMatch.Map, OnCellSelected);
         }
 
         public void OnCellSelected(MapCell cell)
         {
-            _battleService.EvaluateHit(BattleMatch, cell);
-            if (BattleMatch.IsGameOver)
-                _navigationService.PopUpMessage("You won!", "Game over.\nFor a new round, press \"Start battle\"");
+            _gamePlay.EvaluateHit(cell);
+            if (GameStateMatch.IsGameOver)
+                _navigationService.PopUpMessage("You won!", "Press \"Start new game\" for another round.");
         }
     }
 }

@@ -5,9 +5,7 @@ VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Battleships.Presenter", "Battleships.Presenter\Battleships.Presenter.csproj", "{46C9FDEF-C145-4A7D-85C2-101B9FBA8F7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Battleships.Models", "Battleships.Models\Battleships.Models.csproj", "{189C9F7F-FD35-4137-B6AA-B101F7DDA67E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Battleships.Business", "Battleships.Business\Battleships.Business.csproj", "{C052E0F4-620D-4108-B5E5-C0A14EF1C845}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Battleships.GameEngine", "Battleships.Business\Battleships.GameEngine.csproj", "{C052E0F4-620D-4108-B5E5-C0A14EF1C845}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		{46C9FDEF-C145-4A7D-85C2-101B9FBA8F7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46C9FDEF-C145-4A7D-85C2-101B9FBA8F7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46C9FDEF-C145-4A7D-85C2-101B9FBA8F7A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{189C9F7F-FD35-4137-B6AA-B101F7DDA67E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{189C9F7F-FD35-4137-B6AA-B101F7DDA67E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{189C9F7F-FD35-4137-B6AA-B101F7DDA67E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{189C9F7F-FD35-4137-B6AA-B101F7DDA67E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C052E0F4-620D-4108-B5E5-C0A14EF1C845}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C052E0F4-620D-4108-B5E5-C0A14EF1C845}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C052E0F4-620D-4108-B5E5-C0A14EF1C845}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
-using Battleships.Models;
+using Battleships.Business.Maps;
 
 namespace Battleships.Presenter.Style.Converters
 {
@@ -12,7 +12,7 @@ namespace Battleships.Presenter.Style.Converters
         {
             var cell = (MapCell)value;
 
-            if (cell.Equals(cell.Ship?.Head) && cell.State == MapCellStateType.Hit)
+            if (cell.Equals(cell.Character?.Head) && cell.State == MapCellStateType.Hit)
                 return new SolidColorBrush(Colors.DarkRed);
 
             switch (cell.State)

@@ -41,12 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MapCellStateType.cs" />
-    <Compile Include="SeaBattleSettings.cs" />
-    <Compile Include="MapCell.cs" />
-    <Compile Include="SeaBattle.cs" />
+    <Compile Include="Characters\BattleshipCharacter.cs" />
+    <Compile Include="Characters\DestroyerCharacter.cs" />
+    <Compile Include="Characters\ICharacter.cs" />
+    <Compile Include="Map\MapCellStateType.cs" />
+    <Compile Include="Game\GameSettings.cs" />
+    <Compile Include="Map\MapCell.cs" />
+    <Compile Include="Game\GameState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Ship.cs" />
+    <Compile Include="Characters\SeaShipCharacter.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

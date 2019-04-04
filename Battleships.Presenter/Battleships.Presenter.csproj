@@ -149,13 +149,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Battleships.Business\Battleships.Business.csproj">
+    <ProjectReference Include="..\Battleships.Business\Battleships.GameEngine.csproj">
       <Project>{c052e0f4-620d-4108-b5e5-c0a14ef1c845}</Project>
-      <Name>Battleships.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Battleships.Models\Battleships.Models.csproj">
-      <Project>{189c9f7f-fd35-4137-b6aa-b101f7dda67e}</Project>
-      <Name>Battleships.Models</Name>
+      <Name>Battleships.GameEngine</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

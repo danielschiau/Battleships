@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
-using Battleships.Models;
+using Battleships.Business.Maps;
 
 namespace Battleships.Presenter.Style.Converters
 {
@@ -11,11 +11,13 @@ namespace Battleships.Presenter.Style.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var cell = (MapCell) value;
-            var shipPresent = cell?.Ship != null ? new SolidColorBrush(Colors.Blue) : new SolidColorBrush(Colors.WhiteSmoke);
 
-            return cell.Equals(cell.Ship?.Head)
-                ? new SolidColorBrush(Colors.DarkBlue)
-                : shipPresent;
+            if (cell?.Character != null)
+            {
+                return cell.Equals(cell.Character?.Head) ? new SolidColorBrush(Colors.DarkBlue) : new SolidColorBrush(Colors.Blue);
+            }
+
+            return new SolidColorBrush(Colors.WhiteSmoke);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
