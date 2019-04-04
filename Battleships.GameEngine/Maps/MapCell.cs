@@ -1,6 +1,6 @@
-﻿using Battleships.Models.Characters;
+﻿using Battleships.GameEngine.Characters;
 
-namespace Battleships.Models.Map
+namespace Battleships.GameEngine.Maps
 {
     public class MapCell
     {

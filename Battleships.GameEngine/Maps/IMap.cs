@@ -1,6 +1,6 @@
-﻿using Battleships.Business.Characters;
+﻿using Battleships.GameEngine.Characters;
 
-namespace Battleships.Business.Maps
+namespace Battleships.GameEngine.Maps
 {
     public interface IMap
     {

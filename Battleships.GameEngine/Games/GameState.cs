@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Battleships.Models.Characters;
-using Battleships.Models.Map;
+using Battleships.GameEngine.Characters;
+using Battleships.GameEngine.Maps;
 
-namespace Battleships.Models.Game
+namespace Battleships.GameEngine.Games
 {
     public class GameState
     {

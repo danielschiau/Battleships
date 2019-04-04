@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Battleships.Models.Map;
+using Battleships.GameEngine.Maps;
 
-namespace Battleships.Models.Characters
+namespace Battleships.GameEngine.Characters
 {
     public interface ICharacter
     {

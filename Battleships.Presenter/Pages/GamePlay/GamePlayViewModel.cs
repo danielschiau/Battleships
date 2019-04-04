@@ -1,5 +1,5 @@
-﻿using Battleships.Business.Games;
-using Battleships.Business.Maps;
+﻿using Battleships.GameEngine.Games;
+using Battleships.GameEngine.Maps;
 using Battleships.Presenter.Navigation;
 using Battleships.Presenter.Pages.Base;
 using Battleships.Presenter.Pages.Battlefield;

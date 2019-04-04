@@ -1,4 +1,4 @@
-﻿namespace Battleships.Models.Characters
+﻿namespace Battleships.GameEngine.Characters
 {
     public class BattleshipCharacter : SeaShipCharacter
     {

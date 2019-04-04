@@ -7,8 +7,8 @@
     <ProjectGuid>{C052E0F4-620D-4108-B5E5-C0A14EF1C845}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Battleships.Business</RootNamespace>
-    <AssemblyName>Battleships.Business</AssemblyName>
+    <RootNamespace>Battleships.GameEngine</RootNamespace>
+    <AssemblyName>Battleships.GameEngine</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

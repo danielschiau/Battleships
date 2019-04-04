@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Battleships.Business.Characters;
+using Battleships.GameEngine.Characters;
 
-namespace Battleships.Business.Maps
+namespace Battleships.GameEngine.Maps
 {
     public class SeaMap : IMap
     {

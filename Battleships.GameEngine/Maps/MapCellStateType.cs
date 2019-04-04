@@ -1,4 +1,4 @@
-﻿namespace Battleships.Models.Map
+﻿namespace Battleships.GameEngine.Maps
 {
     public enum MapCellStateType
     {

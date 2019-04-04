@@ -149,7 +149,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Battleships.Business\Battleships.GameEngine.csproj">
+    <ProjectReference Include="..\Battleships.GameEngine\Battleships.GameEngine.csproj">
       <Project>{c052e0f4-620d-4108-b5e5-c0a14ef1c845}</Project>
       <Name>Battleships.GameEngine</Name>
     </ProjectReference>

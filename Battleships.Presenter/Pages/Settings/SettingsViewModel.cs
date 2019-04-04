@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Battleships.Business.Characters;
-using Battleships.Business.Games;
+using Battleships.GameEngine.Characters;
+using Battleships.GameEngine.Games;
 using Battleships.Presenter.Navigation;
 using Battleships.Presenter.Pages.Base;
 using Battleships.Presenter.Pages.GamePlay;

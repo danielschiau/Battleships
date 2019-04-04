@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Battleships.Business.Characters;
+using Battleships.GameEngine.Characters;
 
-namespace Battleships.Business.Games
+namespace Battleships.GameEngine.Games
 {
     public class GameSettings
     {

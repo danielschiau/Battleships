@@ -1,4 +1,4 @@
-﻿namespace Battleships.Business.Characters
+﻿namespace Battleships.GameEngine.Characters
 {
     public class DestroyerCharacter : SeaShipCharacter
     {

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Battleships.Models.Map;
+using Battleships.GameEngine.Maps;
 
-namespace Battleships.Models.Characters
+namespace Battleships.GameEngine.Characters
 {
     public class SeaShipCharacter : ICharacter
     {

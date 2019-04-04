@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using Battleships.Business.Maps;
+using Battleships.GameEngine.Maps;
 
-namespace Battleships.Business.Games
+namespace Battleships.GameEngine.Games
 {
     public class BattleshipGame : IGamePlay
     {

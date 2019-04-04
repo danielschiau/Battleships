@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using Battleships.Business.Maps;
+using Battleships.GameEngine.Maps;
 using Battleships.Presenter.Pages.Base;
 using Gu.Wpf.DataGrid2D;
 
