@@ -14,11 +14,12 @@ namespace Battleships.Presenter.Style.Converters
 
             switch (state)
             {
+                case CellStateType.NotTouched: return new SolidColorBrush(Colors.WhiteSmoke);
                 case CellStateType.Tested: return new SolidColorBrush(Colors.Gray);
                 case CellStateType.Hit: return new SolidColorBrush(Colors.Red);
-                case CellStateType.NotTouched: 
-                default: return new SolidColorBrush(Colors.WhiteSmoke);
             }
+
+            return new SolidColorBrush(Colors.Yellow);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

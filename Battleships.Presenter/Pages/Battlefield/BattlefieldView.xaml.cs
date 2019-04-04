@@ -10,6 +10,7 @@ namespace Battleships.Presenter.Pages.Battlefield
         public BattlefieldView()
         {
             InitializeComponent();
+            BattlefieldMap.SelectedCellsChanged += (sender, args) => (sender as DataGrid)?.Items.Refresh();
         }
     }
 }

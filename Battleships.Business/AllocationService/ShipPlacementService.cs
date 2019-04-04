@@ -7,6 +7,7 @@ namespace Battleships.Business.AllocationService
 {
     public class ShipPlacementService : ITargetPlacementService<List<Ship>>
     {
+        private const int MaxAllocationRetries = 10000;
         private readonly Random _random;
 
         public ShipPlacementService()
@@ -14,36 +15,34 @@ namespace Battleships.Business.AllocationService
             _random = new Random();
         }
 
-        public List<Ship> PlaceTargetsOnMap(List<Ship> ships, MapCell[,] map)
+        public List<Ship> PlaceTargetsOnMap(List<Ship> shipsSettings, MapCell[,] map)
         {
-            foreach (var ship in ships)
+            var result = new List<Ship>();
+
+            foreach (var shipSettings in shipsSettings)
             {
+                var ship = Clone(shipSettings);
                 var isHorizontal = _random.Next(2) == 0;
                 ship.Position = PositionShip(isHorizontal, ship.Size, map);
                 ship.Head = ship.Position.First();
-
-                foreach (var cell in ship.Position)
-                {
-                    map[cell.Row, cell.Column].Ship = ship;
-                }
+                ship.Position.ForEach(cell => map[cell.Row, cell.Column].Ship = ship);
+                result.Add(ship);
             }
 
-            return ships;
+            return result;
         }
 
         private List<MapCell> PositionShip(bool isHorizontal, int shipSize, MapCell[,] map)
         {
-            var tries = 0;
-            var maxTries = 10000;
-            var placeFound = false;
+            var allocationRetries = 0;
 
-            var rows = map.GetLength(0);
-            var columns = map.GetLength(1);
+            var rowsNr = map.GetLength(0);
+            var columnsNr = map.GetLength(1);
 
-            var rowsBorder = !isHorizontal ? rows : rows - shipSize;
-            var columnsBorder = isHorizontal ? columns : columns - shipSize;
+            var rowsBorder = !isHorizontal ? rowsNr : rowsNr - shipSize;
+            var columnsBorder = isHorizontal ? columnsNr : columnsNr - shipSize;
 
-            while (tries < maxTries)
+            while (allocationRetries < MaxAllocationRetries)
             {
                 var allocatedCells = 0;
                 var result = new List<MapCell>();
@@ -78,10 +77,22 @@ namespace Battleships.Business.AllocationService
                     }
                 }
 
-                maxTries++;
+                allocationRetries++;
             }
 
             return null;
+        }
+
+        private static Ship Clone(Ship ship)
+        {
+            return new Ship
+            {
+                Position = ship.Position,
+                Head = ship.Head,
+                IsSunk = ship.IsSunk,
+                Name = ship.Name,
+                Size = ship.Size
+            };
         }
     }
 }

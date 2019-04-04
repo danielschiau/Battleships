@@ -53,6 +53,8 @@ namespace Battleships.Business.BattleService
                     ship.IsSunk = true;
                 }
             }
+
+            battle.IsGameOver = battle.Ships.All(x => x.IsSunk);
         }
 
         private static bool IsSamePosition(MapCell mapCell, MapCell other)

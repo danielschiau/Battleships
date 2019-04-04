@@ -4,6 +4,6 @@ namespace Battleships.Business.AllocationService
 {
     public interface ITargetPlacementService<T>
     {
-        T PlaceTargetsOnMap(T targets, MapCell[,] map);
+        T PlaceTargetsOnMap(T shipsSettings, MapCell[,] map);
     }
 }
