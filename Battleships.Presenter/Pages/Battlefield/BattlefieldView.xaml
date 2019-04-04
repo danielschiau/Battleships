@@ -9,32 +9,36 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <StackPanel>
-        <TextBlock Text="Double click on a cell for launching the missile" />
-
-        <Button Content="Toggle debug mode" HorizontalAlignment="Left" Padding="10 0" Command="{Binding ToggleDebugModeCommand}"></Button>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Toggle debug mode"  HorizontalAlignment="Left" Padding="10 0" Command="{Binding ToggleDebugModeCommand}"></Button>
+            <TextBlock Text="Double click on a cell for launching the missile" VerticalAlignment="Center" Margin="20 0 0 0" Foreground="Blue" />
+        </StackPanel>
 
         <StackPanel Orientation="Horizontal">
-        <DataGrid Name="BattlefieldMapDebug"
-                  Visibility="{Binding IsDebugMode, Converter={StaticResource BooleanToVisibilityConverter}}"
+            <StackPanel  Visibility="{Binding IsDebugMode, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <DataGrid Name="BattlefieldMapDebug"
                   Margin="0 20 20 0"
                   RowHeaderWidth="20"
                   HeadersVisibility="All"
                   dataGrid2D:ItemsSource.ColumnHeadersSource="{Binding ColumnHeaders}"
                   dataGrid2D:ItemsSource.RowHeadersSource="{Binding RowHeaders}"
                   dataGrid2D:ItemsSource.Array2D="{Binding Map}">
-            <DataGrid.RowStyle>
-                <Style TargetType="DataGridRow">
-                    <Setter Property="IsEnabled" Value="True"/>
-                </Style>
-            </DataGrid.RowStyle>
-                <dataGrid2D:Cell.Template>
-                    <DataTemplate>
-                        <Border Margin="5" Width="40" Height="35" Background="{Binding Converter={StaticResource DebugModeMapConverter}}" />
-                    </DataTemplate>
-                </dataGrid2D:Cell.Template>
-            </DataGrid>
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </Style>
+                    </DataGrid.RowStyle>
+                    <dataGrid2D:Cell.Template>
+                        <DataTemplate>
+                            <Border Margin="5" Width="40" Height="35" Background="{Binding Converter={StaticResource DebugModeMapConverter}}" />
+                        </DataTemplate>
+                    </dataGrid2D:Cell.Template>
+                </DataGrid>
+                <TextBlock Text="Debug map (just to be easier to hit the targets)" />
+            </StackPanel>
 
-        <DataGrid Name="BattlefieldMap"
+            <StackPanel>
+            <DataGrid Name="BattlefieldMap"
                   Margin="0 20 0 0"
                   SelectionMode="Single"
                   SelectionUnit="Cell"
@@ -44,33 +48,35 @@
                   dataGrid2D:ItemsSource.RowHeadersSource="{Binding RowHeaders}"
                   dataGrid2D:ItemsSource.Array2D="{Binding Map}"
                   dataGrid2D:Selected.Index="{Binding SelectedCellIndex}">
-            <DataGrid.RowStyle>
-                <Style TargetType="DataGridRow">
-                    <Setter Property="IsEnabled" Value="True"/>
-                </Style>
-            </DataGrid.RowStyle>
-            <dataGrid2D:Cell.Template>
-                <DataTemplate>
-                    <Border Cursor="Hand" Margin="5" Width="40" Height="35" Background="{Binding Converter={StaticResource CellStateToBackgroundConverter}}" />
-                </DataTemplate>
-            </dataGrid2D:Cell.Template>
-            <DataGrid.CellStyle>
-                <Style TargetType="DataGridCell">
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="WhiteSmoke" />
-                            <Setter Property="BorderThickness" Value="1" />
-                            <Setter Property="BorderBrush" Value="DarkGray" />
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="IsEnabled" Value="True"/>
+                    </Style>
+                </DataGrid.RowStyle>
+                <dataGrid2D:Cell.Template>
+                    <DataTemplate>
+                        <Border Cursor="Hand" Margin="5" Width="40" Height="35" Background="{Binding Converter={StaticResource CellStateToBackgroundConverter}}" />
+                    </DataTemplate>
+                </dataGrid2D:Cell.Template>
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="WhiteSmoke" />
+                                <Setter Property="BorderThickness" Value="1" />
+                                <Setter Property="BorderBrush" Value="DarkGray" />
                             </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.CellStyle>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDoubleClick">
-                    <i:InvokeCommandAction Command="{Binding CellSelectedCommand}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </DataGrid>
+                        <i:InvokeCommandAction Command="{Binding CellSelectedCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </DataGrid>
+                <TextBlock Text="Gameplay map" FontWeight="Bold" />
+            </StackPanel>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">

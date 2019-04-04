@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Battleships.Models;
+using Battleships.GameEngine.Characters;
+using Battleships.GameEngine.Games;
 using Battleships.Presenter.Navigation;
 using Battleships.Presenter.Pages.Base;
 using Battleships.Presenter.Pages.GamePlay;
@@ -27,8 +28,8 @@ namespace Battleships.Presenter.Pages.Settings
             set { _selectedGridSize = value; OnPropertyChanged(nameof(SelectedGridSize)); }
         }
 
-        private ObservableCollection<Ship> _ships;
-        public ObservableCollection<Ship> Ships
+        private ObservableCollection<ICharacter> _ships;
+        public ObservableCollection<ICharacter> Ships
         {
             get => _ships;
             set { _ships = value; OnPropertyChanged(nameof(Ships)); }
@@ -44,11 +45,10 @@ namespace Battleships.Presenter.Pages.Settings
 
         public DelegateCommand NavigateToGamePlayCommand => new DelegateCommand(() =>
         {
-            _gamePlayViewModel.StartBattle(new SeaBattleSettings
+            _gamePlayViewModel.StartBattle(new GameSettings
             {
-                Columns = SelectedGridSize.Key,
-                Rows = SelectedGridSize.Value,
-                Ships = Ships.ToList()
+                MapSize = SelectedGridSize.Value,
+                Characters = Ships.ToList()
             });
 
             _navigationService.NavigateToViewModel(_gamePlayViewModel);
@@ -65,23 +65,11 @@ namespace Battleships.Presenter.Pages.Settings
 
             SelectedGridSize = GridSizeOptions.First();
 
-            Ships = new ObservableCollection<Ship>
+            Ships = new ObservableCollection<ICharacter>
             {
-                new Ship
-                {
-                    Name = "Battleship",
-                    Size = 5
-                },
-                new Ship
-                {
-                    Name = "Destroyer A",
-                    Size = 4
-                },
-                new Ship
-                {
-                    Name = "Destroyer B",
-                    Size = 4
-                }
+                new BattleshipCharacter("Colorado Battleship"),
+                new DestroyerCharacter("USS Bulkeley Destroyer"),
+                new DestroyerCharacter("USS Carney Destroyer")
             };
         }
     }

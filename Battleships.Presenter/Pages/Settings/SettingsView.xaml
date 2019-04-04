@@ -27,7 +27,7 @@
         </StackPanel>
 
         <StackPanel Orientation="Vertical" Margin="0 20 0 0">
-            <TextBlock Text="Ships" FontSize="18"></TextBlock>
+            <TextBlock Text="Characters" FontSize="18"></TextBlock>
             <ListView ItemsSource="{Binding Ships}" BorderThickness="0">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -39,7 +39,7 @@
                 </ListView.ItemsPanel>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <mah:Tile Margin="0" Width="100" Height="70">
+                        <mah:Tile Margin="0" Width="200" Height="70">
                             <StackPanel>
                                 <TextBlock Text="{Binding Name}" FontSize="18" />
                                 <TextBlock Text="" />

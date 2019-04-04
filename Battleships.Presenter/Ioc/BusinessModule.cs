@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using Autofac;
-using Battleships.Business.AllocationService;
-using Battleships.Business.BattleService;
-using Battleships.Business.MapService;
-using Battleships.Models;
+﻿using Autofac;
+using Battleships.GameEngine.Games;
+using Battleships.GameEngine.Maps;
 
 namespace Battleships.Presenter.Ioc
 {
@@ -11,9 +8,8 @@ namespace Battleships.Presenter.Ioc
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<SeaBattleService>().As<IBattleService<SeaBattle, SeaBattleSettings>>();
-            builder.RegisterType<ShipPlacementService>().As<ITargetPlacementService<List<Ship>>>();
-            builder.RegisterType<SeaMapService>().As<IBattleMapService>();
+            builder.RegisterType<BattleshipGame>().As<IGamePlay>();
+            builder.RegisterType<SeaMap>().As<IMap>();
         }
     }
 }
