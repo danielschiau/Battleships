@@ -4,17 +4,20 @@ using Battleships.GameEngine.Characters;
 
 namespace Battleships.GameEngine.Maps
 {
-    public class SeaMap : IMap
+    public class SeaWorld : IWorld
     {
         private const int MaxAllocationRetries = 10000;
         private readonly Random _random;
 
-        public SeaMap()
+        public MapCell[,] Map { get; set; }
+
+        public SeaWorld(int size)
         {
             _random = new Random();
+            Map = CreateMap(size);
         }
 
-        public MapCell[,] Create(int mapSize)
+        private MapCell[,] CreateMap(int mapSize)
         {
             var map = new MapCell[mapSize, mapSize];
 
@@ -22,25 +25,25 @@ namespace Battleships.GameEngine.Maps
             {
                 for (var column = 0; column < mapSize; column++)
                 {
-                    map[row, column] = new MapCell { Row = row, Column = column };
+                    map[row, column] = new MapCell(row, column);
                 }
             }
 
             return map;
         }
 
-        public void PlaceOnMap(ICharacter character, MapCell[,] map)
+        public void PlaceOnMap(ICharacter character)
         {
-            character.Position = GetCharacterPosition(character.Size, map);
-            character.Position.ForEach(x => map[x.Row, x.Column].Character = character);
+            character.Position = GetCharacterPosition(character.Size);
+            character.Position?.ForEach(x => Map[x.Row, x.Column].Character = character);
         }
 
-        private List<MapCell> GetCharacterPosition(int shipSize, MapCell[,] map)
+        private List<MapCell> GetCharacterPosition(int shipSize)
         {
             var isHorizontal = _random.Next(2) == 0;
 
-            var rowsNr = map.GetLength(0);
-            var columnsNr = map.GetLength(1);
+            var rowsNr = Map.GetLength(0);
+            var columnsNr = Map.GetLength(1);
 
             var rowsBorder = !isHorizontal ? rowsNr : rowsNr - shipSize;
             var columnsBorder = isHorizontal ? columnsNr : columnsNr - shipSize;
@@ -56,8 +59,8 @@ namespace Battleships.GameEngine.Maps
                 for (var index = 0; index < endBorder; index++)
                 {
                     var cell = isHorizontal
-                        ? GetEmptyCell(map[index, randomColumn])
-                        : GetEmptyCell(map[randomRow, index]);
+                        ? GetEmptyCell(Map[index, randomColumn])
+                        : GetEmptyCell(Map[randomRow, index]);
 
                     if (cell == null)
                         break;

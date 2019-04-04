@@ -4,8 +4,8 @@ namespace Battleships.GameEngine.Games
 {
     public interface IGamePlay
     {
-        GameState State { get; set; }
-        void Start(GameSettings settings);
+        bool IsGameOver { get; set; }
+        IWorld World { get; set; }
         void EvaluateHit(MapCell hit);
     }
 }

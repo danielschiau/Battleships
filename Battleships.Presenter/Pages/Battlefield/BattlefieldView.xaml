@@ -16,7 +16,7 @@
 
         <StackPanel Orientation="Horizontal">
             <StackPanel  Visibility="{Binding IsDebugMode, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <DataGrid Name="BattlefieldMapDebug"
+                <DataGrid Name="BattlefieldWorldDebug"
                   Margin="0 20 20 0"
                   RowHeaderWidth="20"
                   HeadersVisibility="All"
@@ -38,7 +38,7 @@
             </StackPanel>
 
             <StackPanel>
-            <DataGrid Name="BattlefieldMap"
+            <DataGrid Name="BattlefieldWorld"
                   Margin="0 20 0 0"
                   SelectionMode="Single"
                   SelectionUnit="Cell"

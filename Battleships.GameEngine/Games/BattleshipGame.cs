@@ -1,32 +1,29 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Battleships.GameEngine.Characters;
 using Battleships.GameEngine.Maps;
 
 namespace Battleships.GameEngine.Games
 {
     public class BattleshipGame : IGamePlay
     {
-        private readonly IMap _map;
+        public bool IsGameOver { get; set; }
+        public IWorld World { get; set; }
+        public List<ICharacter> Characters { get; set; }
 
-        public GameState State { get; set; }
-
-        public BattleshipGame(IMap map)
+        public BattleshipGame(GameSettings settings)
         {
-            _map = map;
-        }
+            World = new SeaWorld(settings.MapSize);
 
-        public void Start(GameSettings settings)
-        {
-            var map = _map.Create(settings.MapSize);
-            settings.Characters.ForEach(x => _map.PlaceOnMap(x, map));
-
-            State = new GameState { Map = map, Characters = settings.Characters };
+            Characters = settings.Characters;
+            Characters.ForEach(x => World.PlaceOnMap(x));
         }
 
         public void EvaluateHit(MapCell hit)
         {
-            State.Map[hit.Row, hit.Column].State = MapCellStateType.Tested;
-            State.Characters.ForEach(_ => _.EvaluateHit(hit));
-            State.IsGameOver = State.Characters.All(x => x.IsDestroyed);
+            World.Map[hit.Row, hit.Column].State = MapCellStateType.Tested;
+            Characters.ForEach(_ => _.EvaluateHit(hit));
+            IsGameOver = Characters.All(x => x.IsDestroyed);
         }
     }
 }
