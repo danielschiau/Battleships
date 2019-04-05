@@ -12,11 +12,6 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Content="{Binding BattleField}"/>
-
-            <ContentControl
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Content="{Binding HistoryViewModel}"/>
         </StackPanel>
     </StackPanel>
 </UserControl>

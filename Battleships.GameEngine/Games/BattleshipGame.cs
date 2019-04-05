@@ -8,7 +8,7 @@ namespace Battleships.GameEngine.Games
     public class BattleshipGame : IGame
     {
         public bool IsOver { get; private set; }
-        public IWorld World { get; private set; }
+        public IWorld World { get; }
         public List<ICharacter> Characters { get; private set; }
 
         public BattleshipGame(IWorld world)

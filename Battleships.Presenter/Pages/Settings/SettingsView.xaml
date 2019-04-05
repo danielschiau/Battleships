@@ -17,12 +17,6 @@
                   Width="120"   
                   ItemsSource="{Binding Path=GridSizeOptions}"    
                   SelectedItem="{Binding Path=SelectedGridSize}">
-                <ComboBox.DisplayMemberPath>
-                    <MultiBinding StringFormat="{}{0}, {1}">
-                        <Binding Path="Key" />
-                        <Binding Path="Value" />
-                    </MultiBinding>
-                </ComboBox.DisplayMemberPath>
             </ComboBox>
         </StackPanel>
 

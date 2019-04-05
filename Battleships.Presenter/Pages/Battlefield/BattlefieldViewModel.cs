@@ -69,7 +69,7 @@ namespace Battleships.Presenter.Pages.Battlefield
             for (int index = 0; index < headerSize; index++)
             {
                 RowHeaders.Add((index+1).ToString());
-                ColumnHeaders.Add(((char)(index+65)).ToString());
+                ColumnHeaders.Add(((char)('A'+index)).ToString());
             }
         }
     }

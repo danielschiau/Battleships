@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using Battleships.GameEngine.Characters;
 using Battleships.GameEngine.Games;
@@ -14,20 +13,20 @@ namespace Battleships.Presenter.Pages.Settings
         private readonly INavigationService _navigationService;
         private readonly IGamePlayViewModel _gamePlayViewModel;
 
-        private ObservableCollection<KeyValuePair<int, int>> _gridSizeOptions;
-        public ObservableCollection<KeyValuePair<int, int>> GridSizeOptions
+        private ObservableCollection<int> _gridSizeOptions;
+        public ObservableCollection<int> GridSizeOptions
         {
             get => _gridSizeOptions;
             set { _gridSizeOptions = value; OnPropertyChanged(nameof(GridSizeOptions)); }
         }
 
-        private KeyValuePair<int, int> _selectedGridSize;
-        public KeyValuePair<int, int> SelectedGridSize
+        private int _selectedGridSize;
+        public int SelectedGridSize
         {
             get => _selectedGridSize;
             set { _selectedGridSize = value; OnPropertyChanged(nameof(SelectedGridSize)); }
         }
-
+        
         private ObservableCollection<ICharacter> _ships;
         public ObservableCollection<ICharacter> Ships
         {
@@ -39,7 +38,7 @@ namespace Battleships.Presenter.Pages.Settings
         {
             _gamePlayViewModel.Start(new GameSettings
             {
-                MapSize = SelectedGridSize.Value,
+                MapSize = SelectedGridSize,
                 Characters = Ships.ToList()
             });
 
@@ -51,17 +50,12 @@ namespace Battleships.Presenter.Pages.Settings
             _navigationService = navigationService;
             _gamePlayViewModel = gamePlayViewModel;
 
-            GetDefaultSettings();
+            SetDefaultSettings();
         }
 
-        private void GetDefaultSettings()
+        private void SetDefaultSettings()
         {
-            GridSizeOptions = new ObservableCollection<KeyValuePair<int, int>>
-            {
-                new KeyValuePair<int, int>(10, 10),
-                new KeyValuePair<int, int>(12, 12),
-                new KeyValuePair<int, int>(14, 14)
-            };
+            GridSizeOptions = new ObservableCollection<int> { 10, 12, 14 };
 
             SelectedGridSize = GridSizeOptions.First();
 

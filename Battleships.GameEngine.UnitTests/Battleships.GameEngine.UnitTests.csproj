@@ -74,6 +74,7 @@
     <Compile Include="Characters\DestroyerCharacterTests.cs" />
     <Compile Include="Characters\SeaShipCharacterTests.cs" />
     <Compile Include="Games\BattleshipGameTests.cs" />
+    <Compile Include="MapAllocation\CharacterAllocationTests.cs" />
     <Compile Include="Maps\MapCellTests.cs" />
     <Compile Include="Maps\SeaWorldTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

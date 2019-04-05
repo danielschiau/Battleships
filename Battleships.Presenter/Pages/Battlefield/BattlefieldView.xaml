@@ -85,7 +85,7 @@
                 <Border Margin="5 0 0 0" Width="10" Height="10" BorderBrush="Black" BorderThickness="1" Background="WhiteSmoke" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
-                <TextBlock Text="Tested (miss)"/>
+                <TextBlock Text="Touched (miss)"/>
                 <Border Margin="5 0 0 0" Width="10" Height="10" BorderBrush="Black" BorderThickness="1" Background="Gray" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="15 0 0 0">

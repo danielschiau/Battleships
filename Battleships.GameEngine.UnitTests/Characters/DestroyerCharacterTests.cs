@@ -9,7 +9,6 @@ namespace Battleships.GameEngine.UnitTests.Characters
         [SetUp]
         public override void Setup()
         {
-            Map = new MapBuilder(10).Build();
             ExpectedName = "DestroyerName";
             SubjectUnderTest = new DestroyerCharacter(ExpectedName);
         }

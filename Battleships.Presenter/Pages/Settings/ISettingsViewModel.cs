@@ -4,6 +4,5 @@ namespace Battleships.Presenter.Pages.Settings
 {
     public interface ISettingsViewModel : IViewModel
     {
-
     }
 }

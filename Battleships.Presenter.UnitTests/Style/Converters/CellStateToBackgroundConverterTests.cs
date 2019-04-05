@@ -31,7 +31,7 @@ namespace Battleships.Presenter.UnitTests.Style.Converters
         [Test]
         public void Convert_WithHeadHit_ReturnsDarkRed()
         {
-            _mapCell.State = MapCellStateType.Hit;
+            _mapCell.State = MapCellState.Hit;
 
             var result = _subjectUnderTest.Convert(_mapCell, null, null, CultureInfo.InvariantCulture);
 
@@ -41,7 +41,7 @@ namespace Battleships.Presenter.UnitTests.Style.Converters
         [Test]
         public void Convert_WithOutOfRangeState_ReturnsWhiteSmoke()
         {
-            _mapCell.State = (MapCellStateType)5;
+            _mapCell.State = (MapCellState)5;
             _mapCell.Character.Position = new List<MapCell>(new List<MapCell> { new MapCell(1,2) });
 
             var result = _subjectUnderTest.Convert(_mapCell, null, null, CultureInfo.InvariantCulture);
@@ -52,7 +52,7 @@ namespace Battleships.Presenter.UnitTests.Style.Converters
         [Test]
         public void Convert_WithTailHit_ReturnsRed()
         {
-            _mapCell.State = MapCellStateType.Hit;
+            _mapCell.State = MapCellState.Hit;
             _mapCell.Character.Position = new List<MapCell>(new List<MapCell> { new MapCell(1, 2) });
 
             var result = _subjectUnderTest.Convert(_mapCell, null, null, CultureInfo.InvariantCulture);
@@ -63,7 +63,7 @@ namespace Battleships.Presenter.UnitTests.Style.Converters
         [Test]
         public void Convert_WithTestHit_ReturnsGray()
         {
-            _mapCell.State = MapCellStateType.Tested;
+            _mapCell.State = MapCellState.Touched;
 
             var result = _subjectUnderTest.Convert(_mapCell, null, null, CultureInfo.InvariantCulture);
 
@@ -73,7 +73,7 @@ namespace Battleships.Presenter.UnitTests.Style.Converters
         [Test]
         public void Convert_WithNoHit_ReturnWhiteSmoke()
         {
-            _mapCell.State = MapCellStateType.NotTouched;
+            _mapCell.State = MapCellState.Untouched;
 
             var result = _subjectUnderTest.Convert(_mapCell, null, null, CultureInfo.InvariantCulture);
 

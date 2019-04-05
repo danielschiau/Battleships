@@ -63,7 +63,7 @@ namespace Battleships.GameEngine.UnitTests.Games
         {
             _subjectUnderTest.Start(_gameSettings);
             var cell = new MapCell(1, 2);
-            _subjectUnderTest.Characters.ForEach(x => x.Position.ForEach(p => p.State = MapCellStateType.Hit));
+            _subjectUnderTest.Characters.ForEach(x => x.Position.ForEach(p => p.State = MapCellState.Hit));
 
             _subjectUnderTest.EvaluateHit(cell);
 

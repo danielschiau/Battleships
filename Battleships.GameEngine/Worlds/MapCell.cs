@@ -6,7 +6,7 @@ namespace Battleships.GameEngine.Worlds
     {
         public int Column { get; }
         public int Row { get; }
-        public MapCellStateType State { get; set; }
+        public MapCellState State { get; set; }
         public ICharacter Character { get; set; }
 
         public MapCell(int row, int column)

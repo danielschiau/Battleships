@@ -28,14 +28,14 @@ namespace Battleships.GameEngine.UnitTests.Maps
         }
 
         [Test]
-        public void EvaluateHit_WithUntouchedCell_SetsTheCellToTested()
+        public void EvaluateHit_WithUntouchedCell_SetsTheCellToTouched()
         {
             var cell = new MapCell(1, 2);
-            _subjectUnderTest.Map[cell.Row, cell.Column].State = MapCellStateType.NotTouched;
+            _subjectUnderTest.Map[cell.Row, cell.Column].State = MapCellState.Untouched;
 
             _subjectUnderTest.EvaluateHit(cell);
 
-            Assert.AreEqual(MapCellStateType.Tested, _subjectUnderTest.Map[cell.Row, cell.Column].State);
+            Assert.AreEqual(MapCellState.Touched, _subjectUnderTest.Map[cell.Row, cell.Column].State);
         }
     }
 }

@@ -15,14 +15,16 @@ namespace Battleships.Presenter.Style.Converters
             if (cell == null)
                 return new SolidColorBrush(Colors.WhiteSmoke);
 
-            if (cell.Equals(cell.Character?.Head) && cell.State == MapCellStateType.Hit)
-                return new SolidColorBrush(Colors.DarkRed);
-
             switch (cell.State)
             {
-                case MapCellStateType.NotTouched: return new SolidColorBrush(Colors.WhiteSmoke);
-                case MapCellStateType.Tested: return new SolidColorBrush(Colors.Gray);
-                case MapCellStateType.Hit: return new SolidColorBrush(Colors.Red);
+                case MapCellState.Untouched: return new SolidColorBrush(Colors.WhiteSmoke);
+                case MapCellState.Touched: return new SolidColorBrush(Colors.Gray);
+                case MapCellState.Hit:
+                {
+                    return cell.Equals(cell.Character?.Head)
+                        ? new SolidColorBrush(Colors.DarkRed)
+                        : new SolidColorBrush(Colors.Red);
+                }
                 default: return new SolidColorBrush(Colors.WhiteSmoke);
             }            
         }
