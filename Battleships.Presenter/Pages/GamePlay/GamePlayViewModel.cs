@@ -27,16 +27,17 @@ namespace Battleships.Presenter.Pages.GamePlay
 
         public DelegateCommand StartCommand => new DelegateCommand(() => Start(_settings));
 
-        public GamePlayViewModel(INavigationService navigationService, IBattlefieldViewModel battlefieldViewModel)
+        public GamePlayViewModel(INavigationService navigationService, IGame game, IBattlefieldViewModel battlefieldViewModel)
         {
             _navigationService = navigationService;
+            Game = game;
             BattleField = battlefieldViewModel;
         }
 
         public void Start(GameSettings settings)
         {
             _settings = settings;
-            Game = new BattleshipGame(_settings);
+            Game.Start(_settings);
             BattleField.Render(Game.World.Map, OnCellSelected);
         }
 

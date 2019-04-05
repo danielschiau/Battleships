@@ -8,7 +8,7 @@ namespace Battleships.Presenter.Ioc
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<BattleshipGame>().As<IGame>();
+            builder.RegisterType<BattleshipGame>().As<IGame>().WithParameter("settings", null);
             builder.RegisterType<SeaWorld>().As<IWorld>();
         }
     }

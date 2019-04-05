@@ -15,7 +15,8 @@ namespace Battleships.GameEngine.UnitTests.Maps
         public virtual void Setup()
         {
             _mapSize = 10;
-            _subjectUnderTest = new SeaWorld(10);
+            _subjectUnderTest = new SeaWorld();
+            _subjectUnderTest.CreateMap(_mapSize);
         }
 
         [Test]

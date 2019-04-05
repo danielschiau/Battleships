@@ -11,10 +11,9 @@ namespace Battleships.GameEngine.Worlds
 
         public MapCell[,] Map { get; set; }
 
-        public SeaWorld(int size)
+        public SeaWorld()
         {
             _random = new Random();
-            Map = CreateMap(size);
         }
 
         public void EvaluateHit(MapCell hit)
@@ -23,19 +22,17 @@ namespace Battleships.GameEngine.Worlds
             Map[hit.Row, hit.Column].Character?.EvaluateHit(hit);
         }
 
-        private MapCell[,] CreateMap(int mapSize)
+        public void CreateMap(int mapSize)
         {
-            var map = new MapCell[mapSize, mapSize];
+            Map = new MapCell[mapSize, mapSize];
 
             for (var row = 0; row < mapSize; row++)
             {
                 for (var column = 0; column < mapSize; column++)
                 {
-                    map[row, column] = new MapCell(row, column);
+                    Map[row, column] = new MapCell(row, column);
                 }
             }
-
-            return map;
         }
 
         public void PlaceOnMap(ICharacter character)

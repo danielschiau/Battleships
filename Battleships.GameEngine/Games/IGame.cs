@@ -6,6 +6,7 @@ namespace Battleships.GameEngine.Games
     {
         bool IsOver { get; }
         IWorld World { get; }
+        void Start(GameSettings settings);
         void EvaluateHit(MapCell hit);
     }
 }

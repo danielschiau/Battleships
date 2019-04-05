@@ -21,23 +21,13 @@ namespace Battleships.Presenter.UnitTests.Pages.GamePlay
            SetupBattlefieldViewModel();
            SetupNavigationService();
 
-            _subjectUnderTest = new GamePlayViewModel(_mocker.Get<INavigationService>(), _mocker.Get<IBattlefieldViewModel>());
+            _subjectUnderTest = new GamePlayViewModel(_mocker.Get<INavigationService>(), _mocker.Get<IGame>(), _mocker.Get<IBattlefieldViewModel>());
         }
 
         [Test]
         public void Constructor_BattlefieldViewModel_IsInitialized()
         {
             Assert.IsInstanceOf(typeof(IBattlefieldViewModel), _subjectUnderTest.BattleField);
-        }
-
-        [Test]
-        public void StartBattle_CreatesANewGame()
-        {
-            _subjectUnderTest.Game = null;
-
-            _subjectUnderTest.Start(new GameSettings());
-
-            Assert.IsNotNull(_subjectUnderTest.Game);
         }
 
         [Test]

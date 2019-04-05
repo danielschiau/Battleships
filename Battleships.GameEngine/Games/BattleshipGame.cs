@@ -11,9 +11,14 @@ namespace Battleships.GameEngine.Games
         public IWorld World { get; private set; }
         public List<ICharacter> Characters { get; private set; }
 
-        public BattleshipGame(GameSettings settings)
+        public BattleshipGame(IWorld world)
         {
-            World = new SeaWorld(settings.MapSize);
+            World = world;
+        }
+
+        public void Start(GameSettings settings)
+        {
+            World.CreateMap(settings.MapSize);
 
             Characters = settings.Characters;
             Characters?.ForEach(x => World.PlaceOnMap(x));
