@@ -4,8 +4,8 @@ namespace Battleships.GameEngine.Worlds
 {
     public interface IWorld
     {
-        WorldCell[,] World { get; set; }
-        void EvaluateHit(WorldCell hit);
+        MapCell[,] Map { get; set; }
+        void EvaluateHit(MapCell hit);
         void PlaceOnMap(ICharacter character);
     }
 }

@@ -10,7 +10,7 @@ namespace Battleships.Presenter.Style.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var cell = (WorldCell) value;
+            var cell = (MapCell) value;
 
             if (cell?.Character != null)
             {

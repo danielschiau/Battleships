@@ -7,22 +7,21 @@ namespace Battleships.GameEngine.Games
 {
     public class BattleshipGame : IGamePlay
     {
-        public bool IsGameOver { get; set; }
-        public IWorld World { get; set; }
-        public List<ICharacter> Characters { get; set; }
+        public bool IsGameOver { get; private set; }
+        public IWorld World { get; private set; }
+        public List<ICharacter> Characters { get; private set; }
 
         public BattleshipGame(GameSettings settings)
         {
             World = new SeaWorld(settings.MapSize);
 
             Characters = settings.Characters;
-            Characters.ForEach(x => World.PlaceOnMap(x));
+            Characters?.ForEach(x => World.PlaceOnMap(x));
         }
 
-        public void EvaluateHit(WorldCell hit)
+        public void EvaluateHit(MapCell hit)
         {
             World.EvaluateHit(hit);
-            Characters.ForEach(x => x.EvaluateHit(hit));
             EvaluateGameOver();
         }
 

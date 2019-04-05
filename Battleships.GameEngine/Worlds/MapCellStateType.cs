@@ -1,6 +1,6 @@
 ﻿namespace Battleships.GameEngine.Worlds
 {
-    public enum WorldCellStateType
+    public enum MapCellStateType
     {
         NotTouched,
         Tested,

@@ -70,6 +70,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Navigation\IMainWindowProvider.cs" />
+    <Compile Include="Navigation\MainWindowProvider.cs" />
     <Compile Include="Pages\Base\IViewModel.cs" />
     <Compile Include="Pages\Battlefield\IBattlefieldViewModel.cs" />
     <Compile Include="Pages\GamePlay\IGamePlayViewModel.cs" />
@@ -93,7 +95,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Ioc\BusinessModule.cs" />
+    <Compile Include="Ioc\GameEngineModule.cs" />
     <Compile Include="Ioc\IocSetup.cs" />
     <Compile Include="Ioc\PresenterModule.cs" />
     <Compile Include="Navigation\INavigationService.cs" />

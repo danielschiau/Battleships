@@ -2,20 +2,20 @@
 
 namespace Battleships.GameEngine.Worlds
 {
-    public class WorldCell
+    public class MapCell
     {
         public int Column { get; }
         public int Row { get; }
-        public WorldCellStateType State { get; set; }
+        public MapCellStateType State { get; set; }
         public ICharacter Character { get; set; }
 
-        public WorldCell(int row, int column)
+        public MapCell(int row, int column)
         {
             Row = row;
             Column = column;
         }
 
-        public bool Equals(WorldCell other)
+        public bool Equals(MapCell other)
         {
             return Row == other?.Row && Column == other.Column;
         }

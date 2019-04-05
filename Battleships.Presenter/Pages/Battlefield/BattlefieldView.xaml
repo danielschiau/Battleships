@@ -16,13 +16,13 @@
 
         <StackPanel Orientation="Horizontal">
             <StackPanel  Visibility="{Binding IsDebugMode, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <DataGrid Name="BattlefieldWorldDebug"
+                <DataGrid Name="BattlefieldMapDebug"
                   Margin="0 20 20 0"
                   RowHeaderWidth="20"
                   HeadersVisibility="All"
                   dataGrid2D:ItemsSource.ColumnHeadersSource="{Binding ColumnHeaders}"
                   dataGrid2D:ItemsSource.RowHeadersSource="{Binding RowHeaders}"
-                  dataGrid2D:ItemsSource.Array2D="{Binding World}">
+                  dataGrid2D:ItemsSource.Array2D="{Binding Map}">
                     <DataGrid.RowStyle>
                         <Style TargetType="DataGridRow">
                             <Setter Property="IsEnabled" Value="True"/>
@@ -34,11 +34,11 @@
                         </DataTemplate>
                     </dataGrid2D:Cell.Template>
                 </DataGrid>
-                <TextBlock Text="Debug world (just to be easier to hit the targets)" />
+                <TextBlock Text="Debug map (just to be easier to hit the targets)" />
             </StackPanel>
 
             <StackPanel>
-            <DataGrid Name="BattlefieldWorld"
+            <DataGrid Name="BattlefieldMap"
                   Margin="0 20 0 0"
                   SelectionMode="Single"
                   SelectionUnit="Cell"
@@ -46,7 +46,7 @@
                   HeadersVisibility="All"
                   dataGrid2D:ItemsSource.ColumnHeadersSource="{Binding ColumnHeaders}"
                   dataGrid2D:ItemsSource.RowHeadersSource="{Binding RowHeaders}"
-                  dataGrid2D:ItemsSource.Array2D="{Binding World}"
+                  dataGrid2D:ItemsSource.Array2D="{Binding Map}"
                   dataGrid2D:Selected.Index="{Binding SelectedCellIndex}">
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">
@@ -75,7 +75,7 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </DataGrid>
-                <TextBlock Text="Gameplay world" FontWeight="Bold" />
+                <TextBlock Text="Gameplay map" FontWeight="Bold" />
             </StackPanel>
         </StackPanel>
 

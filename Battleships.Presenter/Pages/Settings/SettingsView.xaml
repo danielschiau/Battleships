@@ -11,7 +11,7 @@
         <TextBlock Text="Welcome to Battleships game, are you ready?" FontSize="32"/>
 
         <StackPanel Orientation="Vertical" Margin="0 60 0 0">
-            <TextBlock Text="Select world size" FontSize="18" VerticalAlignment="Center" />
+            <TextBlock Text="Select map size" FontSize="18" VerticalAlignment="Center" />
             <ComboBox HorizontalAlignment="Left"    
                   VerticalAlignment="Top"   
                   Width="120"   

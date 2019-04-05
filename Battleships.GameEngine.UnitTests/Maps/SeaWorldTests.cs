@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Battleships.GameEngine.Characters;
 using Battleships.GameEngine.Worlds;
 using NUnit.Framework;
@@ -20,31 +21,34 @@ namespace Battleships.GameEngine.UnitTests.Maps
         [Test]
         public void Create_WithGivenSize_ReturnsInitializedMap()
         {
-            Assert.AreEqual(_mapSize, _subjectUnderTest.World.GetLongLength(0));
-            Assert.AreEqual(_mapSize, _subjectUnderTest.World.GetLongLength(1));
-            Assert.IsFalse(_subjectUnderTest.World.Cast<WorldCell>().Contains(null));
+            Assert.AreEqual(_mapSize, _subjectUnderTest.Map.GetLongLength(0));
+            Assert.AreEqual(_mapSize, _subjectUnderTest.Map.GetLongLength(1));
+            Assert.IsFalse(_subjectUnderTest.Map.Cast<MapCell>().Contains(null));
         }
 
         [Test]
         public void EvaluateHit_WithUntouchedCell_SetsTheCellToTested()
         {
-            var cell = new WorldCell(1,2);
-            _subjectUnderTest.World[cell.Row, cell.Column].State = WorldCellStateType.NotTouched;
+            var cell = new MapCell(1, 2);
+            _subjectUnderTest.Map[cell.Row, cell.Column].State = MapCellStateType.NotTouched;
 
             _subjectUnderTest.EvaluateHit(cell);
 
-            Assert.AreEqual(WorldCellStateType.Tested, _subjectUnderTest.World[cell.Row, cell.Column].State);
+            Assert.AreEqual(MapCellStateType.Tested, _subjectUnderTest.Map[cell.Row, cell.Column].State);
         }
 
         [Test]
-        public void EvaluateHit_WithHitCell_DoesNotModifyTheStatus()
+        public void EvaluateHit_WithHitCell_SetsTheCellToHit()
         {
-            var cell = new WorldCell(1, 2);
-            _subjectUnderTest.World[cell.Row, cell.Column].State = WorldCellStateType.Hit;
+            var cell = new MapCell(1, 2);
+            _subjectUnderTest.Map[cell.Row, cell.Column].Character = new BattleshipCharacter("BattleshipCharacter")
+            {
+                Position = new List<MapCell> { _subjectUnderTest.Map[cell.Row, cell.Column] }
+            };
 
             _subjectUnderTest.EvaluateHit(cell);
 
-            Assert.AreEqual(WorldCellStateType.Hit, _subjectUnderTest.World[cell.Row, cell.Column].State);
+            Assert.AreEqual(MapCellStateType.Hit, _subjectUnderTest.Map[cell.Row, cell.Column].State);
         }
 
         [Test]
@@ -64,7 +68,7 @@ namespace Battleships.GameEngine.UnitTests.Maps
 
             _subjectUnderTest.PlaceOnMap(character);
 
-            Assert.AreEqual(character.Size, _subjectUnderTest.World.Cast<WorldCell>().Count(x => x.Character != null));
+            Assert.AreEqual(character.Size, _subjectUnderTest.Map.Cast<MapCell>().Count(x => x.Character != null));
         }
 
         [Test]
@@ -83,8 +87,8 @@ namespace Battleships.GameEngine.UnitTests.Maps
         {
             var allocatedCharacter = new DestroyerCharacter("DestroyerCharacter");
             var characterToAllocate = new BattleshipCharacter("BattleshipCharacter");
- 
-            foreach (var mapCell in _subjectUnderTest.World.Cast<WorldCell>())
+
+            foreach (var mapCell in _subjectUnderTest.Map.Cast<MapCell>())
             {
                 mapCell.Character = allocatedCharacter;
             }

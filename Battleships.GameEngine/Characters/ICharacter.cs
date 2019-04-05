@@ -7,9 +7,9 @@ namespace Battleships.GameEngine.Characters
     {
         string Name { get; set; }
         int Size { get; }
-        WorldCell Head { get; }
-        List<WorldCell> Position { get; set; }
+        MapCell Head { get; }
+        List<MapCell> Position { get; set; }
         bool IsDestroyed { get; }
-        void EvaluateHit(WorldCell hit);
+        void EvaluateHit(MapCell hit);
     }
 }

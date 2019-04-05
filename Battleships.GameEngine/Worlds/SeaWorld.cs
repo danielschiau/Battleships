@@ -9,29 +9,29 @@ namespace Battleships.GameEngine.Worlds
         private const int MaxAllocationRetries = 10000;
         private readonly Random _random;
 
-        public WorldCell[,] World { get; set; }
+        public MapCell[,] Map { get; set; }
 
         public SeaWorld(int size)
         {
             _random = new Random();
-            World = CreateMap(size);
+            Map = CreateMap(size);
         }
 
-        public void EvaluateHit(WorldCell hit)
+        public void EvaluateHit(MapCell hit)
         {
-            if (World[hit.Row, hit.Column].State == WorldCellStateType.NotTouched)
-                World[hit.Row, hit.Column].State = WorldCellStateType.Tested;
+            Map[hit.Row, hit.Column].State = MapCellStateType.Tested;
+            Map[hit.Row, hit.Column].Character?.EvaluateHit(hit);
         }
 
-        private WorldCell[,] CreateMap(int mapSize)
+        private MapCell[,] CreateMap(int mapSize)
         {
-            var map = new WorldCell[mapSize, mapSize];
+            var map = new MapCell[mapSize, mapSize];
 
             for (var row = 0; row < mapSize; row++)
             {
                 for (var column = 0; column < mapSize; column++)
                 {
-                    map[row, column] = new WorldCell(row, column);
+                    map[row, column] = new MapCell(row, column);
                 }
             }
 
@@ -41,15 +41,15 @@ namespace Battleships.GameEngine.Worlds
         public void PlaceOnMap(ICharacter character)
         {
             character.Position = GetCharacterPosition(character.Size);
-            character.Position?.ForEach(x => World[x.Row, x.Column].Character = character);
+            character.Position?.ForEach(x => Map[x.Row, x.Column].Character = character);
         }
 
-        private List<WorldCell> GetCharacterPosition(int shipSize)
+        private List<MapCell> GetCharacterPosition(int shipSize)
         {
             var isHorizontal = _random.Next(2) == 0;
 
-            var rowsNr = World.GetLength(0);
-            var columnsNr = World.GetLength(1);
+            var rowsNr = Map.GetLength(0);
+            var columnsNr = Map.GetLength(1);
 
             var rowsBorder = !isHorizontal ? rowsNr : rowsNr - shipSize;
             var columnsBorder = isHorizontal ? columnsNr : columnsNr - shipSize;
@@ -58,15 +58,15 @@ namespace Battleships.GameEngine.Worlds
             var allocationRetries = 0;
             while (allocationRetries < MaxAllocationRetries)
             {
-                var position = new List<WorldCell>();
+                var position = new List<MapCell>();
                 var randomRow = _random.Next(rowsBorder);
                 var randomColumn = _random.Next(columnsBorder);
 
-                for (var index = 0; index < endBorder; index++)
+                for (var index = 0; index <= endBorder; index++)
                 {
                     var cell = isHorizontal
-                        ? GetEmptyCell(World[index, randomColumn])
-                        : GetEmptyCell(World[randomRow, index]);
+                        ? GetEmptyCell(Map[index, randomColumn])
+                        : GetEmptyCell(Map[randomRow, index]);
 
                     if (cell == null)
                         break;
@@ -83,7 +83,7 @@ namespace Battleships.GameEngine.Worlds
             return null;
         }
 
-        private WorldCell GetEmptyCell(WorldCell cell)
+        private MapCell GetEmptyCell(MapCell cell)
         {
             return cell.Character == null ? cell : null;
         }

@@ -6,6 +6,6 @@ namespace Battleships.Presenter.Pages.Battlefield
 {
     public interface IBattlefieldViewModel : IViewModel
     {
-        void Render(WorldCell[,] world, Action<WorldCell> onCellSelected);
+        void Render(MapCell[,] map, Action<MapCell> onCellSelected);
     }
 }

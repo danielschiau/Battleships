@@ -8,7 +8,7 @@ namespace Battleships.Presenter.Pages.Battlefield
 {
     public class BattlefieldViewModel : BaseViewModel, IBattlefieldViewModel
     {
-        private Action<WorldCell> _onCellSelected;
+        private Action<MapCell> _onCellSelected;
 
         private ObservableCollection<string> _columnHeaders;
         public ObservableCollection<string> ColumnHeaders
@@ -24,11 +24,11 @@ namespace Battleships.Presenter.Pages.Battlefield
             set { _rowHeaders = value; OnPropertyChanged(nameof(RowHeaders)); }
         }
 
-        private WorldCell[,] _world;
-        public WorldCell[,] World
+        private MapCell[,] _map;
+        public MapCell[,] Map
         {
-            get => _world;
-            set { _world = value; OnPropertyChanged(nameof(World)); }
+            get => _map;
+            set { _map = value; OnPropertyChanged(nameof(Map)); }
         }
 
         private bool _isDebugMode;
@@ -53,12 +53,12 @@ namespace Battleships.Presenter.Pages.Battlefield
 
         public DelegateCommand ToggleDebugModeCommand => new DelegateCommand(() => IsDebugMode = !IsDebugMode);
 
-        public DelegateCommand CellSelectedCommand => new DelegateCommand(() => _onCellSelected(World[SelectedCellIndex.Row, SelectedCellIndex.Column]));
+        public DelegateCommand CellSelectedCommand => new DelegateCommand(() => _onCellSelected(Map[SelectedCellIndex.Row, SelectedCellIndex.Column]));
 
-        public void Render(WorldCell[,] world, Action<WorldCell> onCellSelected)
+        public void Render(MapCell[,] map, Action<MapCell> onCellSelected)
         {
             _onCellSelected = onCellSelected;
-            World = world;
+            Map = map;
         }
 
         private void GenerateHeaders()

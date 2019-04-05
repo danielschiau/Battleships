@@ -2,7 +2,6 @@
 using Battleships.GameEngine.Worlds;
 using Battleships.Presenter.Navigation;
 using Battleships.Presenter.Pages.GamePlay;
-using Battleships.Presenter.Pages.MainWindow;
 using Battleships.Presenter.Pages.Settings;
 using Castle.Core.Internal;
 using Moq;
@@ -22,7 +21,7 @@ namespace Battleships.Presenter.UnitTests.Pages.Settings
         {
             _gamePlayViewModelMock = new Mock<IGamePlayViewModel>();
             _gamePlayViewModelMock
-                .Setup(x => x.BattleField.Render(It.IsAny<WorldCell[,]>(), It.IsAny<Action<WorldCell>>()))
+                .Setup(x => x.BattleField.Render(It.IsAny<MapCell[,]>(), It.IsAny<Action<MapCell>>()))
                 .Verifiable();
 
             _navigationServiceMock = new Mock<INavigationService>();
@@ -38,7 +37,7 @@ namespace Battleships.Presenter.UnitTests.Pages.Settings
         }
 
         [Test]
-        public void NavigateToGamePlayCommand_CallsGameplayWithProperSettings()
+        public void NavigateToGamePlayCommand_CallsGamePlayWithProperSettings()
         {
             _subjectUnderTest.NavigateToGamePlayCommand.Execute(null);
 

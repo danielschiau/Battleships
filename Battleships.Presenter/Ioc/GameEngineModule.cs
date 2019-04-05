@@ -4,7 +4,7 @@ using Battleships.GameEngine.Worlds;
 
 namespace Battleships.Presenter.Ioc
 {
-    public class BusinessModule : Module
+    public class GameEngineModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {

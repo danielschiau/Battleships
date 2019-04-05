@@ -37,10 +37,10 @@ namespace Battleships.Presenter.Pages.GamePlay
         {
             _settings = settings;
             Game = new BattleshipGame(_settings);
-            BattleField.Render(Game.World.World, OnCellSelected);
+            BattleField.Render(Game.World.Map, OnCellSelected);
         }
 
-        public void OnCellSelected(WorldCell cell)
+        public void OnCellSelected(MapCell cell)
         {
             _game.EvaluateHit(cell);
             if (Game.IsGameOver)
