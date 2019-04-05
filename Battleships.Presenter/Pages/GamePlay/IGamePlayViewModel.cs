@@ -7,6 +7,6 @@ namespace Battleships.Presenter.Pages.GamePlay
     public interface IGamePlayViewModel : IViewModel
     {
         IBattlefieldViewModel BattleField { get; set; }
-        void StartBattle(GameSettings settings);
+        void Start(GameSettings settings);
     }
 }

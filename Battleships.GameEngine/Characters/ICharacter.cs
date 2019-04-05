@@ -10,6 +10,8 @@ namespace Battleships.GameEngine.Characters
         MapCell Head { get; }
         List<MapCell> Position { get; set; }
         bool IsDestroyed { get; }
+
+        void PlaceOnMap(MapCell[,] map);
         void EvaluateHit(MapCell hit);
     }
 }

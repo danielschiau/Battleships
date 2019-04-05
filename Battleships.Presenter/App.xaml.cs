@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using Autofac;
-using Battleships.Presenter.Ioc;
 using Battleships.Presenter.Navigation;
 
 namespace Battleships.Presenter
@@ -16,9 +15,7 @@ namespace Battleships.Presenter
         {
             Dispatcher.UnhandledException += OnDispatcherUnhandledException;
 
-            IocSetup.RegisterModules();
-
-            _navigationService = IocSetup.Instance.Resolve<INavigationService>();
+            _navigationService = Ioc.Ioc.Instance.Resolve<INavigationService>();
         }
 
         void OnDispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)

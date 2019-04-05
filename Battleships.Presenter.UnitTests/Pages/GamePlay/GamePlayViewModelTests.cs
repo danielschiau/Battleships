@@ -5,33 +5,23 @@ using Battleships.Presenter.Navigation;
 using Battleships.Presenter.Pages.Battlefield;
 using Battleships.Presenter.Pages.GamePlay;
 using Moq;
+using Moq.AutoMock;
 using NUnit.Framework;
 
 namespace Battleships.Presenter.UnitTests.Pages.GamePlay
 {
     public class GamePlayViewModelTests
     {
+        private readonly AutoMocker _mocker = new AutoMocker();
         private GamePlayViewModel _subjectUnderTest;
-        private Mock<IGamePlay> _gamePlayMock;
-        private Mock<INavigationService> _navigationServiceMock;
-        private Mock<IBattlefieldViewModel> _battlefieldViewModelMock;
 
         [SetUp]
         public void Setup()
         {
-           _gamePlayMock = new Mock<IGamePlay>();
+           SetupBattlefieldViewModel();
+           SetupNavigationService();
 
-            _battlefieldViewModelMock = new Mock<IBattlefieldViewModel>();
-            _battlefieldViewModelMock
-                .Setup(x => x.Render(It.IsAny<MapCell[,]>(), It.IsAny<Action<MapCell>>()))
-                .Verifiable();
-
-            _navigationServiceMock = new Mock<INavigationService>();
-            _navigationServiceMock
-                .Setup(x => x.PopUpMessage(It.IsAny<string>(), It.IsAny<string>()))
-                .Verifiable();
-
-            _subjectUnderTest = new GamePlayViewModel(_navigationServiceMock.Object, _battlefieldViewModelMock.Object);
+            _subjectUnderTest = new GamePlayViewModel(_mocker.Get<INavigationService>(), _mocker.Get<IGame>(), _mocker.Get<IBattlefieldViewModel>());
         }
 
         [Test]
@@ -41,37 +31,39 @@ namespace Battleships.Presenter.UnitTests.Pages.GamePlay
         }
 
         [Test]
-        public void StartBattle_CreatesANewGame()
-        {
-            _subjectUnderTest.Game = null;
-
-            _subjectUnderTest.StartBattle(new GameSettings());
-
-            Assert.IsNotNull(_subjectUnderTest.Game);
-        }
-
-        [Test]
         public void OnCellSelected_WithGivenCell_CallsGameEvaluateHit()
         {
-            _subjectUnderTest.Game = _gamePlayMock.Object;
+            var mapCell = new MapCell(0, 0);
+            _subjectUnderTest.Game = _mocker.Get<IGame>();
 
-            _subjectUnderTest.OnCellSelected(new MapCell(0, 0));
+            _subjectUnderTest.OnCellSelected(mapCell);
 
-            _gamePlayMock.Verify(x => x.EvaluateHit(It.IsAny<MapCell>()), Times.Once);
+            _mocker.Verify<IGame>(x => x.EvaluateHit(mapCell), Times.Once);
         }
 
         [Test]
         public void OnCellSelected_WithGameOver_CallsPopupNavigationService()
         {
-            _gamePlayMock
-                .SetupGet(ex => ex.IsGameOver)
-                .Returns(() => true);
-
-            _subjectUnderTest.Game = _gamePlayMock.Object;
+            _subjectUnderTest.Game = _mocker.Get<IGame>();
+            _mocker.GetMock<IGame>().SetupGet(ex => ex.IsOver).Returns(() => true);
 
             _subjectUnderTest.OnCellSelected(new MapCell(0,0));
 
-            _navigationServiceMock.Verify(x => x.PopUpMessage(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
+            _mocker.Verify<INavigationService>(x => x.PopUpMessage(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
+        }
+
+        private void SetupBattlefieldViewModel()
+        {
+            _mocker.GetMock<IBattlefieldViewModel>()
+                .Setup(x => x.Render(It.IsAny<MapCell[,]>(), It.IsAny<Action<MapCell>>()))
+                .Verifiable();
+        }
+
+        private void SetupNavigationService()
+        {
+            _mocker.GetMock<INavigationService>()
+                .Setup(x => x.PopUpMessage(It.IsAny<string>(), It.IsAny<string>()))
+                .Verifiable();
         }
     }
 }

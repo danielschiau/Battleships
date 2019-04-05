@@ -1,7 +1,5 @@
-﻿using System.Windows;
-using Battleships.Presenter.Pages.Base;
+﻿using Battleships.Presenter.Pages.Base;
 using Battleships.Presenter.Pages.Settings;
-using MahApps.Metro.Controls.Dialogs;
 
 namespace Battleships.Presenter.Pages.MainWindow
 {

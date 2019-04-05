@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Battleships.GameEngine.Characters;
+using Battleships.GameEngine.UnitTests.Builders;
 using Battleships.GameEngine.Worlds;
 using NUnit.Framework;
 
@@ -15,7 +15,8 @@ namespace Battleships.GameEngine.UnitTests.Maps
         public virtual void Setup()
         {
             _mapSize = 10;
-            _subjectUnderTest = new SeaWorld(10);
+            _subjectUnderTest = new SeaWorld();
+            _subjectUnderTest.CreateMap(_mapSize);
         }
 
         [Test]
@@ -35,67 +36,6 @@ namespace Battleships.GameEngine.UnitTests.Maps
             _subjectUnderTest.EvaluateHit(cell);
 
             Assert.AreEqual(MapCellStateType.Tested, _subjectUnderTest.Map[cell.Row, cell.Column].State);
-        }
-
-        [Test]
-        public void EvaluateHit_WithHitCell_SetsTheCellToHit()
-        {
-            var cell = new MapCell(1, 2);
-            _subjectUnderTest.Map[cell.Row, cell.Column].Character = new BattleshipCharacter("BattleshipCharacter")
-            {
-                Position = new List<MapCell> { _subjectUnderTest.Map[cell.Row, cell.Column] }
-            };
-
-            _subjectUnderTest.EvaluateHit(cell);
-
-            Assert.AreEqual(MapCellStateType.Hit, _subjectUnderTest.Map[cell.Row, cell.Column].State);
-        }
-
-        [Test]
-        public void PlaceOnMap_WithCharacter_UpdatesTheCharacterPosition()
-        {
-            var character = new DestroyerCharacter("DestroyerCharacter");
-
-            _subjectUnderTest.PlaceOnMap(character);
-
-            Assert.AreEqual(character.Size, character.Position.Count);
-        }
-
-        [Test]
-        public void PlaceOnMap_WithCharacter_UpdatesTheMapCells()
-        {
-            var character = new DestroyerCharacter("DestroyerCharacter");
-
-            _subjectUnderTest.PlaceOnMap(character);
-
-            Assert.AreEqual(character.Size, _subjectUnderTest.Map.Cast<MapCell>().Count(x => x.Character != null));
-        }
-
-        [Test]
-        public void PlaceOnMap_WithCharacter_PlacesCharacterCorrectly()
-        {
-            var character = new DestroyerCharacter("DestroyerCharacter");
-
-            _subjectUnderTest.PlaceOnMap(character);
-
-            Assert.IsTrue(character.Position.Select(x => x.Column).Distinct().FirstOrDefault() != default(int) ||
-                          character.Position.Select(x => x.Row).Distinct().FirstOrDefault() != default(int));
-        }
-
-        [Test]
-        public void PlaceOnMap_WithFullMap_DoesNotAllocateCharacter()
-        {
-            var allocatedCharacter = new DestroyerCharacter("DestroyerCharacter");
-            var characterToAllocate = new BattleshipCharacter("BattleshipCharacter");
-
-            foreach (var mapCell in _subjectUnderTest.Map.Cast<MapCell>())
-            {
-                mapCell.Character = allocatedCharacter;
-            }
-
-            _subjectUnderTest.PlaceOnMap(characterToAllocate);
-
-            Assert.IsNull(characterToAllocate.Position);
         }
     }
 }

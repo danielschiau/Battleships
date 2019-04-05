@@ -40,7 +40,7 @@
     <Compile Include="Characters\ICharacter.cs" />
     <Compile Include="Characters\SeaShipCharacter.cs" />
     <Compile Include="Games\GameSettings.cs" />
-    <Compile Include="Games\IGamePlay.cs" />
+    <Compile Include="Games\IGame.cs" />
     <Compile Include="Games\BattleshipGame.cs" />
     <Compile Include="Worlds\IWorld.cs" />
     <Compile Include="Worlds\MapCell.cs" />

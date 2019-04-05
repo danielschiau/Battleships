@@ -5,29 +5,35 @@ using Battleships.GameEngine.Worlds;
 
 namespace Battleships.GameEngine.Games
 {
-    public class BattleshipGame : IGamePlay
+    public class BattleshipGame : IGame
     {
-        public bool IsGameOver { get; private set; }
+        public bool IsOver { get; private set; }
         public IWorld World { get; private set; }
         public List<ICharacter> Characters { get; private set; }
 
-        public BattleshipGame(GameSettings settings)
+        public BattleshipGame(IWorld world)
         {
-            World = new SeaWorld(settings.MapSize);
+            World = world;
+        }
+
+        public void Start(GameSettings settings)
+        {
+            World.CreateMap(settings.MapSize);
 
             Characters = settings.Characters;
-            Characters?.ForEach(x => World.PlaceOnMap(x));
+            Characters?.ForEach(x => x.PlaceOnMap(World.Map));
         }
 
         public void EvaluateHit(MapCell hit)
         {
             World.EvaluateHit(hit);
+            Characters?.ForEach(x => x.EvaluateHit(hit));
             EvaluateGameOver();
         }
 
         private void EvaluateGameOver()
         {
-            IsGameOver = Characters.All(x => x.IsDestroyed);
+            IsOver = Characters.All(x => x.IsDestroyed);
         }
     }
 }

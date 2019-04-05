@@ -20,7 +20,7 @@ namespace Battleships.Presenter.UnitTests.Ioc
             _container = containerBuilder.Build(ContainerBuildOptions.IgnoreStartableComponents);
         }
 
-        [TestCase(typeof(IGamePlay))]
+        [TestCase(typeof(IGame))]
         [TestCase(typeof(IWorld))]
         public void Load_TypesAreRegistered(Type type)
         {
