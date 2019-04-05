@@ -21,12 +21,13 @@ namespace Battleships.GameEngine.Games
             World.CreateMap(settings.MapSize);
 
             Characters = settings.Characters;
-            Characters?.ForEach(x => World.PlaceOnMap(x));
+            Characters?.ForEach(x => x.PlaceOnMap(World.Map));
         }
 
         public void EvaluateHit(MapCell hit)
         {
             World.EvaluateHit(hit);
+            Characters?.ForEach(x => x.EvaluateHit(hit));
             EvaluateGameOver();
         }
 

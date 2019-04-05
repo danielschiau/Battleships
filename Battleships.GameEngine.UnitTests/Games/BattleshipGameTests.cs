@@ -74,23 +74,20 @@ namespace Battleships.GameEngine.UnitTests.Games
         {
             _mocker.GetMock<IWorld>()
                 .SetupGet(x => x.Map)
-                .Returns(new MapCell[,]
+                .Returns(() =>
                 {
+                    var mapSize = 10;
+                    var map = new MapCell[mapSize, mapSize];
+
+                    for (var row = 0; row < mapSize; row++)
                     {
-                        new MapCell(0, 0),
-                        new MapCell(0, 1),
-                        new MapCell(0, 2),
-                    },
-                    {
-                        new MapCell(1, 0),
-                        new MapCell(1, 1),
-                        new MapCell(1, 2),
-                    },
-                    {
-                        new MapCell(2, 0),
-                        new MapCell(2, 1),
-                        new MapCell(2, 2),
+                        for (var column = 0; column < mapSize; column++)
+                        {
+                            map[row, column] = new MapCell(row, column);
+                        }
                     }
+
+                    return map;
                 });
         }
     }
