@@ -35,17 +35,9 @@ namespace Battleships.Presenter.Pages.Settings
             set { _ships = value; OnPropertyChanged(nameof(Ships)); }
         }
 
-        public SettingsViewModel(INavigationService navigationService, IGamePlayViewModel gamePlayViewModel)
-        {
-            _navigationService = navigationService;
-            _gamePlayViewModel = gamePlayViewModel;
-
-            GetDefaultSettings();
-        }
-
         public DelegateCommand NavigateToGamePlayCommand => new DelegateCommand(() =>
         {
-            _gamePlayViewModel.StartBattle(new GameSettings
+            _gamePlayViewModel.Start(new GameSettings
             {
                 MapSize = SelectedGridSize.Value,
                 Characters = Ships.ToList()
@@ -53,6 +45,14 @@ namespace Battleships.Presenter.Pages.Settings
 
             _navigationService.NavigateToViewModel(_gamePlayViewModel);
         });
+
+        public SettingsViewModel(INavigationService navigationService, IGamePlayViewModel gamePlayViewModel)
+        {
+            _navigationService = navigationService;
+            _gamePlayViewModel = gamePlayViewModel;
+
+            GetDefaultSettings();
+        }
 
         private void GetDefaultSettings()
         {

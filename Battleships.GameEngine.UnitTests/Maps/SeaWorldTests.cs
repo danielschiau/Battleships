@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Battleships.GameEngine.Characters;
+using Battleships.GameEngine.UnitTests.Builders;
 using Battleships.GameEngine.Worlds;
 using NUnit.Framework;
 
@@ -41,10 +41,9 @@ namespace Battleships.GameEngine.UnitTests.Maps
         public void EvaluateHit_WithHitCell_SetsTheCellToHit()
         {
             var cell = new MapCell(1, 2);
-            _subjectUnderTest.Map[cell.Row, cell.Column].Character = new BattleshipCharacter("BattleshipCharacter")
-            {
-                Position = new List<MapCell> { _subjectUnderTest.Map[cell.Row, cell.Column] }
-            };
+            _subjectUnderTest.Map[cell.Row, cell.Column].Character = new SeaShipCharacterBuilder()
+                .WithPosition(new List<MapCell> { _subjectUnderTest.Map[cell.Row, cell.Column] })
+                .Build();
 
             _subjectUnderTest.EvaluateHit(cell);
 
@@ -54,7 +53,7 @@ namespace Battleships.GameEngine.UnitTests.Maps
         [Test]
         public void PlaceOnMap_WithCharacter_UpdatesTheCharacterPosition()
         {
-            var character = new DestroyerCharacter("DestroyerCharacter");
+            var character = new SeaShipCharacterBuilder().Build();
 
             _subjectUnderTest.PlaceOnMap(character);
 
@@ -64,7 +63,7 @@ namespace Battleships.GameEngine.UnitTests.Maps
         [Test]
         public void PlaceOnMap_WithCharacter_UpdatesTheMapCells()
         {
-            var character = new DestroyerCharacter("DestroyerCharacter");
+            var character = new SeaShipCharacterBuilder().Build();
 
             _subjectUnderTest.PlaceOnMap(character);
 
@@ -74,7 +73,7 @@ namespace Battleships.GameEngine.UnitTests.Maps
         [Test]
         public void PlaceOnMap_WithCharacter_PlacesCharacterCorrectly()
         {
-            var character = new DestroyerCharacter("DestroyerCharacter");
+            var character = new SeaShipCharacterBuilder().Build();
 
             _subjectUnderTest.PlaceOnMap(character);
 
@@ -85,8 +84,8 @@ namespace Battleships.GameEngine.UnitTests.Maps
         [Test]
         public void PlaceOnMap_WithFullMap_DoesNotAllocateCharacter()
         {
-            var allocatedCharacter = new DestroyerCharacter("DestroyerCharacter");
-            var characterToAllocate = new BattleshipCharacter("BattleshipCharacter");
+            var allocatedCharacter = new SeaShipCharacterBuilder().Build();
+            var characterToAllocate = new SeaShipCharacterBuilder().Build();
 
             foreach (var mapCell in _subjectUnderTest.Map.Cast<MapCell>())
             {

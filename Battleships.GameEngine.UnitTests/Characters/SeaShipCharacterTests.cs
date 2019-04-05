@@ -61,6 +61,7 @@ namespace Battleships.GameEngine.UnitTests.Characters
             SubjectUnderTest.EvaluateHit(tailHit);
 
             Assert.IsFalse(SubjectUnderTest.IsDestroyed);
+            Assert.IsTrue(SubjectUnderTest.Position.First(x => x.Row == tailHit.Row && x.Column == tailHit.Column ).State == MapCellStateType.Hit);
         }
 
         [Test]
@@ -72,11 +73,9 @@ namespace Battleships.GameEngine.UnitTests.Characters
         [Test]
         public void Head_WithSomePosition_IsFirstCell()
         {
-            var headCell = new MapCell(1, 2);
+            SubjectUnderTest.Position = new List<MapCell> { new MapCell(1, 2), new MapCell( 2, 2) };
 
-            SubjectUnderTest.Position = new List<MapCell> { headCell, new MapCell( 2, 2) };
-
-            Assert.AreEqual(headCell, SubjectUnderTest.Head);
+            Assert.AreEqual(SubjectUnderTest.Position.First(), SubjectUnderTest.Head);
         }
     }
 }

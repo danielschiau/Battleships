@@ -2,18 +2,20 @@
 
 namespace Battleships.Presenter.Ioc
 {
-    public class IocSetup
+    public static class Ioc
     {
-        public static IContainer Instance;
+        private static IContainer _instance;
 
-        public static void RegisterModules()
+        public static IContainer Instance => _instance ?? (_instance = ConfigureContainer());
+
+        private static IContainer ConfigureContainer()
         {
             var containerBuilder = new ContainerBuilder();
 
             containerBuilder.RegisterModule<PresenterModule>();
             containerBuilder.RegisterModule<GameEngineModule>();
 
-            Instance = containerBuilder.Build();
+            return containerBuilder.Build();
         }
     }
 }

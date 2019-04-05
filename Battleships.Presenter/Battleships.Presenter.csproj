@@ -96,7 +96,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Ioc\GameEngineModule.cs" />
-    <Compile Include="Ioc\IocSetup.cs" />
+    <Compile Include="Ioc\Ioc.cs" />
     <Compile Include="Ioc\PresenterModule.cs" />
     <Compile Include="Navigation\INavigationService.cs" />
     <Compile Include="Navigation\NavigationService.cs" />

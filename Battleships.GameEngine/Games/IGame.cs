@@ -2,9 +2,9 @@
 
 namespace Battleships.GameEngine.Games
 {
-    public interface IGamePlay
+    public interface IGame
     {
-        bool IsGameOver { get; }
+        bool IsOver { get; }
         IWorld World { get; }
         void EvaluateHit(MapCell hit);
     }

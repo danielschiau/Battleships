@@ -5,9 +5,9 @@ using Battleships.GameEngine.Worlds;
 
 namespace Battleships.GameEngine.Games
 {
-    public class BattleshipGame : IGamePlay
+    public class BattleshipGame : IGame
     {
-        public bool IsGameOver { get; private set; }
+        public bool IsOver { get; private set; }
         public IWorld World { get; private set; }
         public List<ICharacter> Characters { get; private set; }
 
@@ -27,7 +27,7 @@ namespace Battleships.GameEngine.Games
 
         private void EvaluateGameOver()
         {
-            IsGameOver = Characters.All(x => x.IsDestroyed);
+            IsOver = Characters.All(x => x.IsDestroyed);
         }
     }
 }

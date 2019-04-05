@@ -11,8 +11,8 @@ namespace Battleships.Presenter.Pages.GamePlay
         private GameSettings _settings;
         private readonly INavigationService _navigationService;
 
-        private IGamePlay _game;
-        public IGamePlay Game
+        private IGame _game;
+        public IGame Game
         {
             get => _game;
             set { _game = value; OnPropertyChanged(nameof(Game)); }
@@ -25,15 +25,15 @@ namespace Battleships.Presenter.Pages.GamePlay
             set { _battleField = value; OnPropertyChanged(nameof(BattleField)); }
         }
 
+        public DelegateCommand StartCommand => new DelegateCommand(() => Start(_settings));
+
         public GamePlayViewModel(INavigationService navigationService, IBattlefieldViewModel battlefieldViewModel)
         {
             _navigationService = navigationService;
             BattleField = battlefieldViewModel;
         }
 
-        public DelegateCommand StartBattleCommand => new DelegateCommand(() => StartBattle(_settings));
-
-        public void StartBattle(GameSettings settings)
+        public void Start(GameSettings settings)
         {
             _settings = settings;
             Game = new BattleshipGame(_settings);
@@ -43,7 +43,7 @@ namespace Battleships.Presenter.Pages.GamePlay
         public void OnCellSelected(MapCell cell)
         {
             _game.EvaluateHit(cell);
-            if (Game.IsGameOver)
+            if (Game.IsOver)
                 _navigationService.PopUpMessage("You won!", "Press \"Start new game\" for another round.");
         }
     }

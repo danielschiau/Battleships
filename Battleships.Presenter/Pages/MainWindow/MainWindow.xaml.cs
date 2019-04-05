@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Battleships.Presenter.Ioc;
 using MahApps.Metro.Controls;
 
 namespace Battleships.Presenter.Pages.MainWindow
@@ -12,7 +11,7 @@ namespace Battleships.Presenter.Pages.MainWindow
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = IocSetup.Instance.Resolve<IMainWindowViewModel>();
+            DataContext = Ioc.Ioc.Instance.Resolve<IMainWindowViewModel>();
         }
     }
 }

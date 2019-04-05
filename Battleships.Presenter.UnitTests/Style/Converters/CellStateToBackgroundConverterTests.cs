@@ -5,7 +5,6 @@ using System.Windows.Media;
 using Battleships.GameEngine.Characters;
 using Battleships.GameEngine.Worlds;
 using Battleships.Presenter.Style.Converters;
-using Moq;
 using NUnit.Framework;
 
 namespace Battleships.Presenter.UnitTests.Style.Converters

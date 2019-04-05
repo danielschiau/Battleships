@@ -20,7 +20,7 @@ namespace Battleships.Presenter.Navigation
 
         public void PopUpMessage(string title, string message)
         {
-            Application.Current.Dispatcher.Invoke(() => DialogCoordinator.Instance.ShowMessageAsync(_mainWindowProvider.GetMainWindowContext(), title, message));
+            _mainWindowProvider.Invoke(() => DialogCoordinator.Instance.ShowMessageAsync(_mainWindowProvider.GetMainWindowContext(), title, message));
         }
     }
 }

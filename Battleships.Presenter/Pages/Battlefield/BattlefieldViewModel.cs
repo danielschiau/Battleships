@@ -45,15 +45,15 @@ namespace Battleships.Presenter.Pages.Battlefield
             set { _selectedCellIndex = value; OnPropertyChanged(nameof(SelectedCellIndex)); }
         }
 
-        public BattlefieldViewModel()
-        {
-            IsDebugMode = true;
-            GenerateHeaders();
-        }
-
         public DelegateCommand ToggleDebugModeCommand => new DelegateCommand(() => IsDebugMode = !IsDebugMode);
 
         public DelegateCommand CellSelectedCommand => new DelegateCommand(() => _onCellSelected(Map[SelectedCellIndex.Row, SelectedCellIndex.Column]));
+
+        public BattlefieldViewModel()
+        {
+            IsDebugMode = true;
+            GenerateHeaders(20);
+        }
 
         public void Render(MapCell[,] map, Action<MapCell> onCellSelected)
         {
@@ -61,10 +61,16 @@ namespace Battleships.Presenter.Pages.Battlefield
             Map = map;
         }
 
-        private void GenerateHeaders()
+        private void GenerateHeaders(int headerSize)
         {
-            ColumnHeaders = new ObservableCollection<string>{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N"};
-            RowHeaders = new ObservableCollection<string>{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"};
+            RowHeaders = new ObservableCollection<string>();
+            ColumnHeaders = new ObservableCollection<string>();
+            
+            for (int index = 0; index < headerSize; index++)
+            {
+                RowHeaders.Add((index+1).ToString());
+                ColumnHeaders.Add(((char)(index+65)).ToString());
+            }
         }
     }
 }

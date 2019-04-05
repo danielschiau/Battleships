@@ -66,6 +66,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\SeaShipCharacterBuilder.cs" />
     <Compile Include="Characters\BattleshipCharacterTests.cs" />
     <Compile Include="Characters\DestroyerCharacterTests.cs" />
     <Compile Include="Characters\SeaShipCharacterTests.cs" />

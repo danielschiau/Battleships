@@ -2,6 +2,7 @@
 using System.Linq;
 using Battleships.GameEngine.Characters;
 using Battleships.GameEngine.Games;
+using Battleships.GameEngine.UnitTests.Builders;
 using Battleships.GameEngine.Worlds;
 using NUnit.Framework;
 
@@ -17,7 +18,7 @@ namespace Battleships.GameEngine.UnitTests.Games
             _subjectUnderTest = new BattleshipGame(new GameSettings
             {
                 MapSize = 10,
-                Characters = new List<ICharacter> { new BattleshipCharacter("Battleship") }
+                Characters = new List<ICharacter> { new SeaShipCharacterBuilder().Build() }
             });
         }
 
@@ -52,7 +53,7 @@ namespace Battleships.GameEngine.UnitTests.Games
 
             _subjectUnderTest.EvaluateHit(cell);
 
-            Assert.IsTrue(_subjectUnderTest.IsGameOver);
+            Assert.IsTrue(_subjectUnderTest.IsOver);
         }
     }
 }
