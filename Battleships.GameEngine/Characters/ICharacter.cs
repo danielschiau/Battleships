@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Battleships.GameEngine.Maps;
+using Battleships.GameEngine.Worlds;
 
 namespace Battleships.GameEngine.Characters
 {

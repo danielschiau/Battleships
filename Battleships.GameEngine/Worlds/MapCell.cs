@@ -1,13 +1,19 @@
 ﻿using Battleships.GameEngine.Characters;
 
-namespace Battleships.GameEngine.Maps
+namespace Battleships.GameEngine.Worlds
 {
     public class MapCell
     {
-        public int Column { get; set; }
-        public int Row { get; set; }
+        public int Column { get; }
+        public int Row { get; }
         public MapCellStateType State { get; set; }
         public ICharacter Character { get; set; }
+
+        public MapCell(int row, int column)
+        {
+            Row = row;
+            Column = column;
+        }
 
         public bool Equals(MapCell other)
         {

@@ -12,11 +12,12 @@ namespace Battleships.Presenter.Ioc
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<NavigationService>().As<INavigationService>().SingleInstance();
+            builder.RegisterType<MainWindowProvider>().As<IMainWindowProvider>().SingleInstance();
 
-            builder.RegisterType<BattlefieldViewModel>().AsSelf();
-            builder.RegisterType<GamePlayViewModel>().AsSelf();
-            builder.RegisterType<MainWindowViewModel>().AsSelf();
-            builder.RegisterType<SettingsViewModel>().AsSelf();
+            builder.RegisterType<BattlefieldViewModel>().As<IBattlefieldViewModel>();
+            builder.RegisterType<GamePlayViewModel>().As<IGamePlayViewModel>().AsSelf();
+            builder.RegisterType<MainWindowViewModel>().As<IMainWindowViewModel>().AsSelf();
+            builder.RegisterType<SettingsViewModel>().As<ISettingsViewModel>().AsSelf();
         }
     }
 }

@@ -40,13 +40,12 @@
     <Compile Include="Characters\ICharacter.cs" />
     <Compile Include="Characters\SeaShipCharacter.cs" />
     <Compile Include="Games\GameSettings.cs" />
-    <Compile Include="Games\GameState.cs" />
-    <Compile Include="Games\IGame.cs" />
+    <Compile Include="Games\IGamePlay.cs" />
     <Compile Include="Games\BattleshipGame.cs" />
-    <Compile Include="Maps\IMap.cs" />
-    <Compile Include="Maps\MapCell.cs" />
-    <Compile Include="Maps\MapCellStateType.cs" />
-    <Compile Include="Maps\SeaMap.cs" />
+    <Compile Include="Worlds\IWorld.cs" />
+    <Compile Include="Worlds\MapCell.cs" />
+    <Compile Include="Worlds\MapCellStateType.cs" />
+    <Compile Include="Worlds\SeaWorld.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

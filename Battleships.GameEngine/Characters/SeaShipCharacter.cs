@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Battleships.GameEngine.Maps;
+using Battleships.GameEngine.Worlds;
 
 namespace Battleships.GameEngine.Characters
 {
@@ -9,7 +9,7 @@ namespace Battleships.GameEngine.Characters
         public string Name { get; set; }
         public int Size { get; }
         public List<MapCell> Position { get; set; }
-        public MapCell Head => Position.FirstOrDefault();
+        public MapCell Head => Position?.FirstOrDefault();
         public bool IsDestroyed => Position.All(x => x.State == MapCellStateType.Hit);
 
         public SeaShipCharacter(string name, int size)
@@ -20,6 +20,9 @@ namespace Battleships.GameEngine.Characters
 
         public void EvaluateHit(MapCell hit)
         {
+            if (Position == null)
+                return;
+            
             EvaluateHeadHit(hit);
             EvaluateTailHit(hit);
         }

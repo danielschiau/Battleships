@@ -1,11 +1,11 @@
-﻿using Battleships.GameEngine.Maps;
+﻿using Battleships.GameEngine.Worlds;
 
 namespace Battleships.GameEngine.Games
 {
     public interface IGamePlay
     {
-        GameState State { get; set; }
-        void Start(GameSettings settings);
+        bool IsGameOver { get; }
+        IWorld World { get; }
         void EvaluateHit(MapCell hit);
     }
 }

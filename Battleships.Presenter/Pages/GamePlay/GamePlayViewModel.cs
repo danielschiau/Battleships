@@ -1,34 +1,32 @@
 ﻿using Battleships.GameEngine.Games;
-using Battleships.GameEngine.Maps;
+using Battleships.GameEngine.Worlds;
 using Battleships.Presenter.Navigation;
 using Battleships.Presenter.Pages.Base;
 using Battleships.Presenter.Pages.Battlefield;
 
 namespace Battleships.Presenter.Pages.GamePlay
 {
-    public class GamePlayViewModel : BaseViewModel
+    public class GamePlayViewModel : BaseViewModel, IGamePlayViewModel
     {
         private GameSettings _settings;
-        private readonly IGamePlay _gamePlay;
         private readonly INavigationService _navigationService;
 
-        private GameState _gameStateMatch;
-        public GameState GameStateMatch
+        private IGamePlay _game;
+        public IGamePlay Game
         {
-            get => _gameStateMatch;
-            set { _gameStateMatch = value; OnPropertyChanged(nameof(GameStateMatch)); }
+            get => _game;
+            set { _game = value; OnPropertyChanged(nameof(Game)); }
         }
 
-        private BattlefieldViewModel _battleField;
-        public BattlefieldViewModel BattleField
+        private IBattlefieldViewModel _battleField;
+        public IBattlefieldViewModel BattleField
         {
             get => _battleField;
             set { _battleField = value; OnPropertyChanged(nameof(BattleField)); }
         }
 
-        public GamePlayViewModel(IGamePlay gamePlay, INavigationService navigationService, BattlefieldViewModel battlefieldViewModel)
+        public GamePlayViewModel(INavigationService navigationService, IBattlefieldViewModel battlefieldViewModel)
         {
-            _gamePlay = gamePlay;
             _navigationService = navigationService;
             BattleField = battlefieldViewModel;
         }
@@ -38,15 +36,14 @@ namespace Battleships.Presenter.Pages.GamePlay
         public void StartBattle(GameSettings settings)
         {
             _settings = settings;
-            _gamePlay.Start(_settings);
-            GameStateMatch = _gamePlay.State;
-            BattleField.Render(GameStateMatch.Map, OnCellSelected);
+            Game = new BattleshipGame(_settings);
+            BattleField.Render(Game.World.Map, OnCellSelected);
         }
 
         public void OnCellSelected(MapCell cell)
         {
-            _gamePlay.EvaluateHit(cell);
-            if (GameStateMatch.IsGameOver)
+            _game.EvaluateHit(cell);
+            if (Game.IsGameOver)
                 _navigationService.PopUpMessage("You won!", "Press \"Start new game\" for another round.");
         }
     }

@@ -9,10 +9,10 @@ using Battleships.Presenter.Pages.GamePlay;
 
 namespace Battleships.Presenter.Pages.Settings
 {
-    public class SettingsViewModel : BaseViewModel
+    public class SettingsViewModel : BaseViewModel, ISettingsViewModel
     {
         private readonly INavigationService _navigationService;
-        private readonly GamePlayViewModel _gamePlayViewModel;
+        private readonly IGamePlayViewModel _gamePlayViewModel;
 
         private ObservableCollection<KeyValuePair<int, int>> _gridSizeOptions;
         public ObservableCollection<KeyValuePair<int, int>> GridSizeOptions
@@ -35,7 +35,7 @@ namespace Battleships.Presenter.Pages.Settings
             set { _ships = value; OnPropertyChanged(nameof(Ships)); }
         }
 
-        public SettingsViewModel(INavigationService navigationService, GamePlayViewModel gamePlayViewModel)
+        public SettingsViewModel(INavigationService navigationService, IGamePlayViewModel gamePlayViewModel)
         {
             _navigationService = navigationService;
             _gamePlayViewModel = gamePlayViewModel;

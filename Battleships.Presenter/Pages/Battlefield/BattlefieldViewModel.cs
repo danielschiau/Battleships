@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using Battleships.GameEngine.Maps;
+using Battleships.GameEngine.Worlds;
 using Battleships.Presenter.Pages.Base;
 using Gu.Wpf.DataGrid2D;
 
 namespace Battleships.Presenter.Pages.Battlefield
 {
-    public class BattlefieldViewModel : BaseViewModel
+    public class BattlefieldViewModel : BaseViewModel, IBattlefieldViewModel
     {
         private Action<MapCell> _onCellSelected;
 

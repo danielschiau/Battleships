@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Battleships.Presenter", "Ba
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Battleships.GameEngine", "Battleships.GameEngine\Battleships.GameEngine.csproj", "{C052E0F4-620D-4108-B5E5-C0A14EF1C845}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{AA0FCF61-47C9-464C-8F05-27B361AB9BB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Battleships.GameEngine.UnitTests", "Battleships.GameEngine.UnitTests\Battleships.GameEngine.UnitTests.csproj", "{BE640F51-46ED-40F1-B9F2-8D753AE4CEC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Battleships.Presenter.UnitTests", "Battleships.Presenter.UnitTests\Battleships.Presenter.UnitTests.csproj", "{B1B64E85-709E-40F0-BE23-E2A7F8C7F515}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +27,21 @@ Global
 		{C052E0F4-620D-4108-B5E5-C0A14EF1C845}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C052E0F4-620D-4108-B5E5-C0A14EF1C845}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C052E0F4-620D-4108-B5E5-C0A14EF1C845}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE640F51-46ED-40F1-B9F2-8D753AE4CEC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE640F51-46ED-40F1-B9F2-8D753AE4CEC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE640F51-46ED-40F1-B9F2-8D753AE4CEC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE640F51-46ED-40F1-B9F2-8D753AE4CEC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1B64E85-709E-40F0-BE23-E2A7F8C7F515}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1B64E85-709E-40F0-BE23-E2A7F8C7F515}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1B64E85-709E-40F0-BE23-E2A7F8C7F515}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1B64E85-709E-40F0-BE23-E2A7F8C7F515}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BE640F51-46ED-40F1-B9F2-8D753AE4CEC9} = {AA0FCF61-47C9-464C-8F05-27B361AB9BB4}
+		{B1B64E85-709E-40F0-BE23-E2A7F8C7F515} = {AA0FCF61-47C9-464C-8F05-27B361AB9BB4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ED13A619-7B44-4C3C-88EC-1F0307E84395}

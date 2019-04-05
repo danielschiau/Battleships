@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
-using Battleships.GameEngine.Maps;
+using Battleships.GameEngine.Worlds;
 
 namespace Battleships.Presenter.Style.Converters
 {
